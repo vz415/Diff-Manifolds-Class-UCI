@@ -1,0 +1,114 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{8}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review: Smooth Maps}
+
+Smooth maps: $f: M \rightarrow N$. We have the concept of a diffeo., where if f is bijective, then both f and its inverse are smooth. This diffeomorphism between mfds. give us a way to define an \textit{equivalence class}. We usually define manifolds up to a diffeomorphism. Whereas in topology things can be defined by a homeomorphism. 
+
+\textbf{Properties of Diffeos.}
+\begin{itemize}
+    \item For $f: M \rightarrow N$ and $g: N \rightarrow P$, if f and g are diffeos, then $g \circ f $ is a diffeo.
+    \item If $f: M \rightarrow N$ is a diffeo., then so is its inverse ($f^{-1}$). Moreover, $dim(M)=dim(N)$.
+    \item For any smooth mfd., $M$, we can define $Diff(M)= \{ f:M \rightarrow M | f$ is a diffeo $\}$ this is a group called the diffeomorphism group of $M$. Diffeo group of a manifold. These show up in diff geom. and topology (which are almost the same in 2D & 3D) a lot.
+\end{itemize}
+
+About the smooth map, $f: M\rightarrow N$. This induces a "pullback" map on $C^{\infty}(N)$. Looking t the space of smooth functions from M to N, there's a new map from N to a Real number line, where map from N to number line is 'g', $g \in C^{\infty}(N)$. Can bring 'g' back to a function on M has a composition $g \circ f$. The Pullback map is usually written by $f^* : C^{\infty}(N) \rightarrowC^{\infty}(M)$ and $ g \rightarrow g \circ f$. Thus, if you haver a smooth map, can always have a pullback function. 
+\newline
+
+To be concrete, ask the question: How do we construct smooth maps? On Euclidean space, easy. On a general smooth manifold, constructing smooth maps may be tricky.
+
+Let $\{U_{\alpha}\}_{\alpha \in A}$ be an open cover of $M$. 
+\begin{enumerate}
+    \item Define a smooth map: $f_a : U_a \rightarrow N$ for each $U_a$.
+    \item "glue" maps together.
+\end{enumerate}
+
+However, we must require that the maps agree on the overlap regions. i.e. $f_a|_{U_a \cap U_B} = f_B|_{U_a \cap U_B}$. If (*) holds, the $\exists!$ smooth map $f: M \rightarrow N$ such that $f|_{U_a} = f_a \foral \alpha \in A$
+
+\begin{itemize}
+    \item Comment: $f_a$ are "local maps"
+    \item $f$ is global (i.e. well-defined function on every point $p\in M$
+\end{itemize}
+
+Drawback to this method is when checking the intersection of these regions. So, when you have many charts, not easy to accomplish.
+
+(*) is very restrictive and generally difficult to satisfy. 
+
+We seek another method to "glue" local maps together into global ones without assuming they agree on overlaps. Enter: partition on unity. Before we get there... a review on supports.
+
+Def: The "support" of $f$ is the set $supp(f) = \overline{\{ p \in M | f(p) \neq 0 \}}$, where the bar indicates the closure.  
+\begin{itemize}
+    \item We say $f$ is supported in $U$ if $supp(f)$ is contained in some set $U \subseteq M$. 
+    \item $f$ is compactly supported if $supp(f)$ is a compact set.
+\end{itemize}
+Note: If M is compact, then any function is compactly supported.
+
+Def: A \textit{partition of unity} of a mfd. M is a collection of non-negative(smooth) functions (we're going to almost always assume that in this class).
+\begin{itemize}
+    \item $\{ \Psi_a\}_{a \in A }$ such that:
+    \begin{enumerate}
+        \item Every pt. has a nbhd. in which $\sum_a \Psi_a$ is a finite sum (i.e. nbhd intersects $supp(\psi_a)$ for only finitely many values of a)
+        \item This finite sum $\sum_a \psi_a = 1 \forall p \in M$. These are nonnegative, so $0 \leq \psi_a(p) \leq 1 \forall a \in A$ and $p \in M$.
+    \end{enumerate}
+\end{itemize}
+
+Theorem: (existence of partition of unity). For any open cover, $\{ U_a \}_{a \in A}$ of  $M$, $\exists$ a partition of unity $\{ \psi_a \}_{a \in A}$ such that $supp \psi_a  \subseteq U_a$ where $\{\psi_a\} $ is a partition of unity subordinate to the open cover $\{ U_a\}$. Haven't proved...
+
+Punchline: $f = \sum_a \psi_a f_a$ is a global map. Use to define a global metric, global connections, and etc. for all different types of constructors on smooth manifolds. 
+
+Some comments: 
+\begin{itemize}
+    \item The $supp\psi_a$ is not assuemd to be compact. Ex. $M \in \mathbb{R}^1$ and open cover of just one set $\mathbb{R}^1$. There's not partition of unity of compact support subordinate to it. 
+    \item Can require a partition of unity! So, $\{\psi_{\beta}\}_{\beta\in B}$ with compact support, i.e. $supp(\psi_{\beta} \subseteq U_a$ for some a. This is like taking apart and gluing. 
+\end{itemize}
+
+\end{document}

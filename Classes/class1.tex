@@ -1,0 +1,134 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{1}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Syllabus}
+Office: Rowland Hall 440D 
+Office hours: Monday at 4pm on zoom. Show up at 4pm or by appointment.
+
+Canvas course page: canvas.com/etc.../courses/40797
+
+Textbook: John Lee etc. free pdf springer textook - download pdf!
+
+References: Loring Tu, "An Introduction to Manifolds" 2nd edition
+* probably in the online library
+
+Course: cover chpts 1-7 of John Lee. 
+
+Requirements: HWs, maybe 4 HWs. Just turn in HW and study on own. Wants participation in class but  not graded. Option to give end of quarter presentation on topic of interest on what I'm working on at the time. COOL - this might be helpful with my work. 
+
+
+
+
+\section{Class Notes}
+
+Study of geometrical objects. 
+
+Push the imagination to go to higher dimensions called "Flat Spaces" that are Euclidean spaces.
+
+\subsection{Curved  spaces}
+
+Dim=1, then a curved space can just be a small splotch on a flat plane. This is a CLOSED CURVE. 
+
+Dim=2, surfaces like the surface of a sphere. $S^2$ or a Torus $T^2$. 
+
+Many objects we might not even try to draw. A lot of research into the toplogy of chromatin folding. 
+
+\subsection{More Abstract}
+
+Higher dimensional objects. We can use the Minkowski space $M^3$. Take a slice to study. Looking at Big Data, there's a high-dimensional representation. 
+
+\subsection{Analyzing and Characterizing, or distinguishing, geometrical objects}
+
+Keyword: character/distinguish different objects! Start identifying properties that separate properties into separate spaces, e.g. visual properties: connectedness (topology), compactness (toplogy: flat world vs. spherical earth), number of holes (sphere vs. donut vs. more holes, etc.). 
+
+Characterize up to a certain equivalence. Can group objects by certain equivalences. Toplogical properties do not change under continuous maps. 
+
+We want to use more tools than just topology, so we want to use more "precise" measures. E.G. Think of simple objects first, then go up (haha). 
+
+For example, calculus, "How much it curves" - slopes and derivatives. 
+
+Area & volume of objects: Integrals. 
+
+Can we perform "calculus" on more general geometric objects? Sometimes too hard to  consider everything, so limit to smaller subset of objects to generalize from, hence, the smooth manifold!
+
+\subsection{Smooth Manifolds}
+Sre geometrical objects that are "locally similar enough" to Euclidean $\mathbf{R}^n$ - which locally looks like a Euclidean object. 
+
+For the most part, we'll talk about smooth manifolds, but the more general class of manifolds are \textbf{topological manifolds}.
+
+\subsection{Analysis Review}
+Define smooth: smooth functions (and maps). 
+
+Definition of smooth function: Let \textbf{U} be an open set in $\mathbf{R}^n$ and $f: \mathbf{U} \arrow \mathbf{R}$ is a continuous function. And f is a $C^k$ function (k-times differentiable). Partial derivatives of order at most $k$ that is continous and differentiable. 
+
+* f is a $C^{\infty}$ (a smooth function) if it is of class $C^k \forall k \in \mathcal{Z}^+$
+
+* f is a $C^W$ (analytic function) if it's smooth and agrees with its Taylor series.
+
+Ex.
+\begin{equation}
+    f(x)=
+    \begin{cases}
+      0, & \text{if}\ x \leq 1 \\
+      e^{-1/x}, & x >0
+    \end{cases}
+\end{equation}
+
+Put notes here from phone about limit of the function going to zero as x goes to zero.
+
+\subsection{Smooth maps }
+Let $u \subset R^n$ be an open set and $V \subset \mathbb{R}^m$ be an open set. Then, $f = (f_1, f_2, \dots, f_m)$
+
+We say $f$ is $c^{\infty}$ (or $C^k$ or $C^w$) if each component $f_i k$ is $c^{\infty}$
+
+\end{document}

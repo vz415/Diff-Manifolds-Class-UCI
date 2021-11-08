@@ -1,0 +1,99 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{17}                  % <-- homework number
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Embedded Submanifold}
+
+Def: Let $M$ be a smooth mfd. of dim n. For $k < n$, a subset $S \subset M$ is a k-dim embedded submanifold of $M$ if $S$ satisfies the slice chart condition. i.e. $\forall p \in S, \exists $ a chart $\{\phi, U, V\}$ around $p \in M$ s.t. $\phi (U \cap S) =  V \cap \{ \mathbb{R}^K \times \{0\}\}= \{ x \in \phi(u) | x_{k+1} = \dots = x_n = 0\}$.
+
+Remarks
+\begin{itemize}
+    \item Lee's defn. of an embedded submfd. is a subset $S \subseteq M$ that is a mfd. in the subspace topology endowed with a smooth structure w.r.t which map $i: S \mapsto M$ is a smooth embedding. 
+    \item Two defns are equivalent! We will show embedded submfds. (slice chart) is the same as Lee's defn. of smooh embeddings
+    \item Embedded submfds are also called "regular submanifolds".
+    \item For $S \subset M$ an embedded submfd of $dim = k$ IF $\dim M = n$, then the difference $(n-k)$ is called the \textit{codimension} of $S$. 
+    \item An embeded submfd. of codimension=1 is called an embedded hypersurface.
+    \item The mfd. $M$ containing $S$ is sometimes called "the ambient" mfd. of $S$. 
+\end{itemize}
+
+\textit{Theorem for embedded submfd. with slice chart:} Let $S$ be a k-dim embedded submfd. of $M$, then with the subspace topology $S$ admits a smooth structure s.t.:
+\begin{enumerate}
+    \item $S$ is a smooth mfd. of $\dim = k$
+    \item The inclusion map, $i: S \mapsto M$ is a smooth embedding.
+\end{enumerate}
+
+Comments: The Defn. of embedded submfd. (slice chart) $S \implies S$ has slice charts induced from $M$. So, (1)$\implies S$ is a smooth mfd. fro these charts. AND with this smooth structure, we can consider the smoothness of the map $i: S \mapsto M$. AND by (2), $i$ is a smooth embedding. Also, it turns out that there is a unique smooth structure on $S$ s.t. $i: S \mapsto M$ is a smooth embedding. Up to diffeomorphism, this smooth structure is the slice chart from the definition. 
+
+\textbf{Proof of (1)}: 
+$S$ has to satisfy all smooth mfd. axioms (Hausdorf, 2nd countable) inherited from subspace topology. To construct local charts, let $\pi: \mathbb{R}^n \rightarrow \mathbb{R}^k$ and $(x_1, \dots, x_n) \mapsto (x_1, \dots, x_k)$ and $i: \mathbb{R}^k \rightarrow \mathbb{R}^n$ and $(x_1, \dots, x_k) \mapsto (x_1, \dots, x_k, 0, \dots, 0)$. 
+
+For any chart $(\phi, U, V)$ of $M$ satisfying the slice chart condition. Now, let $X = U \cap S$ and $\psi = \pi \circ \phi$ and $Y = \pi \circ \phi(x)$. Finally, the inclusion is $\psi^{-1} = \phi^{-1} \circ i$ and this all implies that $(\psi, X, Y)$ is a chart on $S$. 
+\begin{itemize}
+    \item Moreover, charts of this type are compatible, since...
+    \begin{align*}
+        \psi_{\alpha \beta} &= \psi_{\beta} \circ \psi_{\alpha}^{-1} \\
+        &= (\pi \circ \phi_{\beta}) \circ (\phi_{\alpha}^{-1} \circ i) \\
+        &= \pi \circ \phi_{\alpha \beta} \circ i \implies \text{is a smooth map from } Y_{\alpha} \text{to } Y_{\beta}
+    \end{align*}
+\end{itemize}
+
+\textbf{Proof of (2)}: 
+Check $i: S \mapsto M$ is a smooth embedding. With $i(s)$ endowed with subspace topology, the map $i: S \mapsto i(S) \subset M \forall p \in S\subset M$ and $i(p) = p$ is treatedd as a pt. in $M$. And the map is a homeo.
+
+It is also an immersion since for each pair of charts. So what is $\hat{i}$? Well, $\hat{i} =\phi \circ i \circ \psi^{-1}$ where $\psi^{-1} =  \phi^{-1} \circ i$ and $\hat{i}$ is the canoncical immersion map and its differential, $d\hat{i}$ is injective. 
+
+\textbf{Proposition:} The slice chart is the unique smooth structure that gives a smooth embedding. 
+
+\textbf{Proof:}Suppose there is some other topology & smooth structure on $S$ s.t. $\Tilde{i} : \Tilde{S}\rightarrow M$ is also a smooth embedding. Here, $\Tilde{S}$ denotes the same set as $S$, but with a different smooth structure. This inclusion map, $\Tilde{i}(\Tilde{S}) = S$, where $S$ is the image on $M$. Can also consider $\Tilde{i}$ as the smooth map from $\Tilde{S} \mapsto S$.
+
+Therefore, for $\forall p \in S$, we can represent $d\Tilde{i}_P : T_P\Tilde{S} \rightarrow T_P M$ as a composition $T_P \Tilde{S} \xrightarrow{d\Tilde{i}_P} T_P S \xrightarrow{di_p} T_P M$ since $d\Tilde{i}_P: T_P \Tilde{S} \rightarrow T_P M$  is injective, this implies $d\hat{i}_p :T_P \Tilde{S} \rightarrow T_P S$ is injective. So this all implies $\Tilde{i}: \Tilde{S} \rightarrow S$ is an immersion where $\Tilde{i}$ is a local diffeo. But $\Tilde{i}(\Tilde{S}) = S$ is bijective. Thus, $\Tilde{i}$ is a diffeo.
+
+\end{document}

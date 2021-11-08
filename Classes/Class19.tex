@@ -1,0 +1,100 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{19}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review: Embedded vs. Immersions}
+\textbf{Prop.} "Immersed submfds are locally Embedded"
+
+If $M$ is a smooth mfd. and $S \leq M$ is an immersed submfd., the $\forall p \in S$, $\exists$ a nbhd $U \subseteq S$ of $P$ s.t. $U$ is an embedded submfd. of $M$. (Lee 5.22 )
+
+So, $i|_U: U \rightarrow M$ is a smooth embedding (Lee 4.25 ). 
+
+Now, \textbf{Prove} the local embedding Thrm., where $F:M \rightarrow N$, then $F$ is a smooth immersion then $\forall p \in M$ has a nbhd. $U \subseteq M$ s.t. $F|_U : U \rightarrow N$ is a smooth embedding. 
+
+We have immersions and embedding maps, we can also talk about local embeddings in the tangent space...
+
+\textbf{Tangent Spaces of Embedded Submfds}
+
+Let $S \subset M$ be a k-dim submfd. and $p \in S$. Can say you have tangent space along $S$, there's also a tangent space on $M$. So, at pt. $p$ we have 2 tangent (vector) spaces: $T_P S$ and $T_P M$. Since we have embedding $i: S \mapsto M$, we can look at the differential of the map that takes tangent space of S to M, like so: $di_p : T_p S \rightarrow T_P M$. This is injective since it's a vector to vector.
+
+We can identify $T_P S$ with $di_p (TS) \leq T_p M \forall p \in S$. i.e. $\forall X_p \in T_P S$ identify with $\Tilde{X}_P = di_p (X_p) \in T_p M$. It can act on functyions s.t. $\forall f \in C^{\infty} (M) $ and $\Tilde{X}_P(f) = [ di_p (X_p)]f = X_p (f \circ i ) = X_p (f|_S)$. ***
+
+Now, we can identify $X_p$ with its pushforward, want to look at vectors on $T_P M$ and see which are coming from $T_P S$. Question: Which tangent vectors in $T_P M$ can be regarded as tangent vectors in $T_P S$? (i.e. are the images of $di_p: T_P S \rightarrow T_p M$).
+
+\textbf{Thrm.} Suppose $S \subseteq M$ is an embedded submfd. and $p \in S$, then, $T_P S \cong di_p T_p S) = \{ \Tilde{X} \in T_P M | \Tilde{X}_P (f) = 0\} \forall f \in C^{\infty}(M)$ with $f|_S = 0$. Basically finding the roots. Encapsulates the notion of a slice chart!
+
+\textbf{Proving the thrm.} 
+\begin{enumerate}
+    \item $T_P S \cong di_p T_P S \subseteq \{ \}$
+    \item $T_P S \cong di_p T_P S \supseteq \{ \}$
+\end{enumerate}
+
+For (1), Let $X_P \in T_P S$
+\begin{align*}
+    \forall f \in C^{\infty } (M); f_S = 0 \\ 
+    \Tilde{X}_P(f) = X_P (f|_S) = 0 \\
+    \blacksquare
+\end{align*}
+
+For (2), Let $\Tilde{X}_P \in T_P M$ s.t. $\Tilde{X}_P (f) = 0 \forall f \in C^{\inft}(M)$ with $f|_S=0$. Show $\exists X_P \in T_P S$ s.t. $\Tilde{X}_P = di_p x_p$. 
+
+Since $S \subset M$ is an embedded submfd., $\exists$ a chart $(\phi, U, V)$ on $M$ arond $p \in S$ s.t. $S$ is given by $X_{k+1} = \dots = x_n = 0$.
+
+Recall, $T_P M = span \{ \frac{\partial}{\partial x_1}, \dots , \frac{\partial}{\partial x_n}\}$, then $T_P S \cong di_p T_p S = span \{ \frac{\partial}{\partial x^1}, \dots, \frac{\partial}{\partial x^k}\}$ we can write any vector $ \Tilde{X}_P = \sum_{i=i}^n X^i \frac{\partial}{\partial x_i} \in di_p T_p S \Longleftrightarrow X^i = 0 \forall i > k$. 
+
+No, let $h$ be a smooth bump function supported in $U$ and $h=1$ in a nbhd of $p$ inside $U$. For $\forall j > k$, consider $f_j (x) = h(x) x^j (\phi (x))$ extend by zero on $M\backslash U$. Then, $f_j |_S = 0$ since $x^j (\phi (x)) |_S = 0$ for $j > k$. 
+
+Moreover by assumption, $0 = \Tilde{X}_P (f_j) = \sum X^i \frac{\partial }{\partial x^i}(h(x) x^j)|_{x=p} = X^i [ \frac{\partial h}{\partial x^i} x^j + h \frac{\partial x^j}{\partial x^i}] = X^j$ where the first part goes to zero since h=1 near p' and the second part is the Kroenecker Delta when $j > k$. 
+
+Connecting with earlier work, $X^j = 0, j>k$ and $\Tilde{X}_p \in di_P T_P S$. Next, immersions, submersions, and local embeddings. 
+
+\end{document}

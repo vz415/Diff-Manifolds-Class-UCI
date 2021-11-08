@@ -1,0 +1,128 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{2}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review continued}
+
+Smoothness of a Euclidean Space.
+
+The differential of f
+
+The directional derivative vectorr of f at pt. x along the direction of v.
+
+Chain Rule
+
+If $f: u \rightarrow v$ and $g: v \rightarrow w$
+
+Diffesomorphisms (make sure not to confuse with homeomorphism)
+
+Def: A smooth map $f: u \rightarrow v$ is a diffeomorphism if f is:
+
+1. bijection (1-1 AKA onto, onto)
+
+2. $f^{-1} : v \rightarrow u$ is also smooth.
+
+Clearly, if $f: u \rightarrow v$ is a diffeomorphism, then... AND if, $f: u \rightarrow v$, $g: v \rightarrow w$ are diffeos, then $g \circ f$ is a diffeomorphism. AND if $f: u \rightarrow v$ is a diffeo, then, $\forall x \in U$, the linear map (invertible matrix), $df_x$ is an isomorphism. then $dim(U) = dim(V)$
+
+PROOF: Follow, $f^{-1} \circ f = \mathbf{I}d_u$, and $f \circ f^{-1} = \mathbf{I}d_v$, so the identity matrix wil, $df^{-1}_{f(x)} \circ df_x = I d_{\mathbf{R^n}}$ and $df^{-1}_{f(x)} \circ df_x = I d_{\mathbf{R^m}}$
+
+edit this later ^.
+
+An isomorphism is not a diffeomorphism. 
+
+Ex. The inverse statement is not true! 
+
+\begin{equation}
+    f: \mathbf{R}^2 \backslash \{0\} \rightarrow \mathbf{R}^2 \backslash \{0\} \\
+    (x_1, x_2) \rightarrow (x_1^2 -x_2^2, 2x_1x_2) \\
+    \forall x \in \mathbf{R}^2 \backslash \{0\}
+    
+\end{equation}
+Soo, $df_x$ is an isomorphism. However, $f(x) = f(-x)$.
+
+Comment: diffeo. btwn different sets, $u$, $v$ in $\mathbf{R}^n$ gives a notion of when two open sets "look the same" gives an equivalence relation in smooth category. 
+
+\subsection{More General Geometrical Objects and Maps}
+Maps between open sets between geometrical objects. Generalize the notion of open maps between open sets (broader than just $\mathbf{R}^n$, but more generally on geometrical objects. 
+
+Reverse question: What type of geometrical spaces can we define smooth maps, or, the relaxed condition, continuous maps? (Ohh didn't know continuous maps were a relaxation of smooth maps!)
+
+Topology: Create an open space to define maps on open spaces. Toplogical spaces!! Allows us to define continuous maps. 
+
+Toplogical manifolds: subset of topological spaces with additional conditions. We need to define smooth maps on the spaces we are studying. 
+
+Smooth manifolds: Subset of top. manifolds, allows to define smoothness of maps)
+
+\section{Review of Topology}
+
+Continuous functions. In calculus we use the limit definition for this, but can also say: $f: \mathbf{R} \rightarrw \mathbf{R}$ is continuous if for any open set $v \subset \mathbf{R}$, the preimage of $f^{-1}(v)$ is also open. 
+
+Def: A topological space $X$ is a set $X$ together with a collection of subsets of $X$ (called the topology of $X$) whose elements are called open sets, s.t., 1. the empty set ${0}$ and whole set, $X \in A$, 2. any union (might be infinite) of open sets is also open. 3. Any finite intersection of open sets is also an open set. 
+
+toplogy is all about open sets. If you have a topology, you have an open set. Remark: The complement of an open set is a closed set. 
+
+Ex: Special topology. 1. $A = ${all subsets of $X$} is call ed the "Discrete Topolgy" - every subset is both open and closed.  2. "Trivial toplogy" this corresponds to $A = {\zero , X}$. This is the trivial. 3. Metric topology of $\mathbf{R}^n$ is the open sets defined by open balls around any point.  4. Induced topology: case where , Let $Y \subset X$, a subset in $Y$ is open if it is of the form $U \cap Y$ for some open st $U$ in $X$.
+
+
+With topology, we have open sets. Def: A map $f: X \rightarrow Y$ between topological spaces is continuous if for any open set $v \subset Y$ the preimage $f^{-1}(v) $ is open in $X$. Notion of equivalence for topological objects.
+
+Qualification. Def: A continous map $f: X \rightarrow Y$ between two topological spaces is called a homeomorphism if 1. f is bijective, 2. $f^{-1}$ is continuous. 
+
+Remark: for $f$ a diffeo, $f: U \in \mathbf{R}^n \rightarrow V \rightarrow \mathbf{R}^m$, then n=m, and the proof is a lot harder!
+
+For homeomorphism, we have the same theorem with diffeo replaced by homeo. 
+
+Theorem is called the "Invariance of Domain". Can look this up but they talk about it in algebraic topology. 
+
+Define connectedness, compactness, etc. All are in the appendix of Lee's book. 
+
+\end{document}

@@ -1,0 +1,93 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{8}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review: Partition of Unity}
+
+It's a collection, $\{\psi_a\}_{a \in A}$ is non-negative and smooth, s.t. $\sum_a \psi_a$ is 1) finite and 2)equals to 1 $\forall p \in M$ , and 3) Can be subordinate to an open cover $\{u_a\}_{a \in A}$ i.e. $supp \psi_a \subseteq U_a$.
+
+Some implications:
+\begin{itemize}
+    \item If $f \in C^{\inft}(M)$ and $\{ \psi_a \}_{a \in A} $ a partition of unity subordinate to $\{ u_a \}_{a \in A}$. Can break up the function as the contribution of each towards a chart. Example: Integration on manifolds!
+\begin{equation}
+    f = (\sum_a \psi_a) f = \sum_a (\psi_a f)
+\end{equation}
+Where $f_a = \psi_a f : U_a \rightarrow \mathbb{R}$. Integration on Mfds: On $\mathbb{R}^n$, $\int_{\mathbb{R}^n} f = \int_{\mathbb{R}^n} \sum_a \psi_a f = \sum_a \int_{U_a} f_a$. 
+    \item If instead given, $F_a: U_a \rightarrow \mathbb{R}$ then we an define $F= \sum_a \psi_a F_a \in C^{\inft}(M)$. Given a collection of local smooth functions can create a global function by their linear combination. Remember this is within an open set! Seems like this is the basis of basis functions!
+\end{itemize}
+
+First, introduce a 'bump' function, like a dirac delta. Can be precise in defining this 'bump' function. 
+\begin{itemize}
+    \item Starting with the real line. Consider the function, $f(x) = e^{1/x}$ if $x > 0$ or 0 when $x < 0$. Case of non-analytic with a smooth function. We're going to use this function to build a "cutoff" function.
+    \begin{itemize}
+        \item Use $f(x)$ to build $h(x)$ where $0 < r_1 < r_2$. $h(x) = \frac{f(r_2 - x)}{f(r_2 - x) + f(x - r_1)}$ has multiple cases. If $x \leq r_1$ then $h(x)=1$. If $x \geq r_2$ then $h(x)=0$. Finally, when $r_1 < x <r_2$ then $0 < h(x) <1$. This is the \textbf{cutoff function}. Completely smooth function.
+    \end{itemize}
+    \item Going to a line in more dimensions, so let $H : \mathbb{R}^n \rightarrow\mathbb{R}$ and $x=(x_1, \dots, x_n)$. Then $H(x) = h(|x|)$ is a smooth function. This bump function becomes like a gaussian kernel in higher dimensions. So, $H(x)=1$ when $B_{r_1}(0)$, which is an open ball with radius $r_1$ that is centered at 0. Then $0 < H < 1$ when  $B_{r_2}(0)\backslash  \Bar{B}_{r_1}(0)$. 
+    \item We can define a bump function for any compact subset of $M$. 
+    \item Theorem: Let $M$ be a smooth mfd. and $k\subset M$ be a compact subset and $U \subset M$ is an open subset that contains $k$. Then, $\exists$ a bump function $f \in C^{\infty}(M)$ s.t. $0 \leq f \leq 1$ and (1) f=1 on K, (2) $supp(f)\subset U$.
+    \item Proof: For $\forall q \in K \exists $ a chart $\{ \phi_q, u_q, v_q\}$ that maps the q to a locally euclidean space by some map $\psi_q$. However, impose that $u_q \subset U$ and $v_q$ contains the open ball $B_{r_3}(0)$. We use $r_3$, so $0<r_1 < r_2 <r_3$. So we have a function, $H(x)$ that's defined on the space. So we could then map from the locally euclidean to a line, should we like. Apply $H$ on $\mathbb{R}^n$ and define $\Phi_q= H(\phi_q(p)) \forall q \in u_q$ or it's 0 if $p \notin u_q$. Where the $supp\Psi_q \subset u_q \subset u$ and $\Phi_q \in C^{\infty}(M)$. Then, let $\Tilde{u}_q = \psi)q^{-1} 
+    (B_{r_1}(0))$ so $\Psi_q = 1$ on $\Tilde{u}_q \subset u_q \subset u$
+    \begin{itemize}
+        \item $q \in k$ can be any pt. in K
+        \item The family of open sts $\{ \Tilde{u}_q \}_{q\in k}$ is an open cover of K.
+        \item Since $K$ is compact, then $\exists$ finite subcover, $\{\Tilde{u}_q \}^N_{i=1}$
+        \item $g = \sum_{i=1}^N \phi_{q_i}$ is smooth, moreover $g>1$ on $K$ and $supp(g) \subset U$ "with support on U". So g goes to 1 as $K>1$. 
+        \item Finally, $f(p) = S(g(p))$
+    \end{itemize}
+\end{itemize}
+Theorem: (Existence of partition of unity - that we previously wrote down). The proof requires the following:
+
+
+Lemma:  For any cover $\{U_a\}$ of $M$, then $\exists$ two countable family of open covers. then $\{V_j\}$ and $\{W_j\}$ of $M$. Then s.t. $\forall j, \Bar{V}_j$ is compact and $\Bar{V}_j \subset W_j$ is a refinement of $\{ U_a \}$ i.e. $\forall j, \exists a = a(j)$ s.t. $W_j \subset U_a$i.e. any $p \in M$ has a nbhd. $W$ s.t. $W \cap W_j \neq 0$ for a finite number 0f $j$.
+
+Proof of theorem: Following from previous theorem of bump function on a compact set -> $\exists 0 \leq f_j \leq C^{\infty}(M)$ s.t. $f_j=1$ on $\Bar{V}_j$ and $supp(f_j) \subset W_j$. Since $\{W_j \}$ is locally finite, then $f = \sum_j f_j$ i a well-defined and smooth on $M$. Since each $f_j \geq 0$ and $\{V_j\}$ is a cover. Then $f > 0$ on M and $g_j = f_j/f$ are smooth and $\sum_j g_j = 1$ and $0\leq g_j \leq 1$ for each j we fix the index $a(j)$ s.t. $W_j \subset U_{a(j)}$ and $\psi_a = \sum_{a(j)=a}g_j$ where the $\{ \psi_a \}$ partition of unity suboardinate to $\{ u_a \}$ 
+
+\end{document}

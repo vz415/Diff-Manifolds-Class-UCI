@@ -1,0 +1,87 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{6}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review of last class}
+Last time: Smooth Manifolds - what are they? Top. mfd. $M$ with a collection of charts that cover $M$ called an atlas (denoted by $a$) such that in any overlap region between 2 charts... (see picture from class). Can link the two with a transition function going back to the "parent" space and then to the neighboring region. This results in $\phi_{\alpha \beta} = \phi_{\beta} \circ \phi_{\alpha}^{-1}$ and where $\phi_{\alpha \beta}$ is a diffeo. 
+
+Comments:
+\begin{itemize}
+    \item A smooth mfd. is a pair $(M,a)$ but typically $a$ is omitted if there is no confusion of the smooth structure.
+    \item We can similarly define $C^k$ or $C^w$ (analytic one) mfds by requiring only the transition map be $C^k$ (or $C^w$).
+    \item Morever, when considering a complex space, want to ask if it can map to a space in complex space ($\dots$) . A complex mfd. is a Hausdorff, 2nd countable, top. space that is locally $\mathbb{C}^n$ and the transition maps are \textbf{biholomorphic} (i.e. a bijective holomorphic function whose inverse is also holomorphic.)
+    \item Some known results: 
+    \begin{itemize}
+        \item $\exists$ top. mfds. that do not admit a smooth structure. The answer came in 1960 when Kervaire used a 10-dim example using tangent bundles. In the 1980s Freedman & Donaldson gave examples in dim=4 of many simply-connected compact mfd. that do not have a smooth structure.
+        \item complex spaces are even-dimensional, always, which gives some neat results and tricks.
+        \item Regarding cmplx. mfd. 
+        \begin{itemize}
+            \item Many even-dimensional mfds. are not complex.
+            \item Some simple questions people can ask: for spheres, $S^n$, it's known only $S^2$ and $S^6$ can be complex. Where, $S^2 = \mathbb{C}\mathbb{P}^1$ is a complex mfd. And, $S^6$ is a famous question about whether this is a complex mfd.
+            \item when spaces are bigger, there are more degrees of freedom.
+        \end{itemize}
+        \item If a top mfd admits a $\mathbb{C}^1$ structure, then it also admits a $C^{\infty}$ structure.
+        \item An atlas is a collection of charts, so for any smooth mfd. $M$ admits an atlas consisting of at most $dim=M+1$ charts. e.g. $S^n$ needs 2 charts, at least for $n\geq1$. And, $\mathbb{R}\mathbb{P}^n$ - study of how many charts you need to cover a topological mfd.
+    \end{itemize}
+    \item A sphere doesn't have a "boundary" so it's an open set. Things with a boundary are a closed set. \textbf{Mfds with bounaries.} For spheres, $\mathbb{S}^n= \{ (x_1, \dots, x_{n+1} \in \mathbb{R}^{n+1}| x_1^2 + \dots + x_{n+1}^2 = 1\}$. (Picture here of progression from $S^0$ to $S^2$. The $S^n$ are the boundary of $(n+1)-dim$ balls. Defn. of a ball: $\mathbb{B}^n = \{ (x_1, \dots, x_n) | x_1^2 + \dots + x_n^2 \leq 1 \}$. Balls are examples of mfds w/ boundary. Notation: $\partial M \neq 0$, where $\partial$ is the boundary operator. Picture of empty filled donut. These allow closed sets, but we want to expand defn. to include \textit{neighborhoods} to be modeled by either:
+    \begin{itemize}
+        \item open subsets of $\mathbb{R}^n$. We need a different model to describe when our neighborhood is on the boundary or not! Can "cut" the space by a half-plane: $\mathbb{H}^n = \{ ( x_1, ,\dots, x_n) \in \mathbb{R}^n | x_n \geq 0\}$. (don't get H confused with quarternions!). Where closed upper Half space $\mathbb{H}^n \subset \mathbb{R}^n$.
+        \item Note: $\mathbb{H}^0 =  \mathbb{R}^0 = \{0\}$. And, $\partial \mathbb{H}^n$ is a boundary of $\mathbb{H}^n$ and $\partial \mathbb{H}^n = \{ ( x_1, \dots, x_n) \in \mathbb{R}^n | x_n = 0\}$.
+        \item $Int \mathbb{H}^n =$ interior of $\mathbb{H}^n \backslash \partial \mathbb{H}^n = \{ (x_1, \dots, x_n) \in \mathbb{R}^n | x_n > 0 \}$. See picture for what this looks like.
+        \item An n-dim top. mfd. with boundary is a Hausdorff, 2nd countable, top. space where every pt. has a neighborhood homeomorphic to either an open subset of $\mathbb{R}^n$ or a (relatively) open subset of $\mathbb{H}^n$.
+        \item Smooth  mfd. boundary: Similarly, Def.: $M$ is called a smooth mfd. with boundary \textit{if} $M$ has a collection of charts in the aboe sense whose domain covers $M$ and the transition maps and their inverses are smooth.
+        \item Function $f$ is smooth along the boundary for $f|_{u \cap Int(H)}$ (Int() means interior) and partial derivatives of $f|_{u \cap Int(H)}$ of all orders have continous extensions to all of $u$. 
+    \end{itemize}
+    
+\end{itemize}
+
+\end{document}

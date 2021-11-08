@@ -1,0 +1,116 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{18}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+HW3: chpt. 4, probs. 5 & 6. chpt. 5, probs 1, 4, 6, 10
+
+\section*{Review: Embedded Submfd}
+Let $S$ be a k-dim embedded submfd. of $M$. We define the embedded submfd. as having slice charts, where the embedded submfd is an object as a subspace of an ambient space, $M$. We showed that the slice charts, $S$ is a smooth mfd. of$\dim=k$, and proved this. Can also think of $i: S \rightarrow M$ as a map that's a smooth embedding/homeo (can think of a curve on $\mathbb{R}^2$ as a set or a map onto it). 
+
+\textbf{Theorem:} Let $F: M \rightarrow N$ be a smooth embedding. Then, $S = F(M) \subset N$ is an embedded submfd. of $N$. i.e. has slice charts.
+
+\textit{Comment:} Altogether, if theorem true, if we have an embedded submfd., it's equivalent to a smooth embedding. 
+
+\textbf{Proof of Theorem:} Goal: Show $S=F(M)$ has slice charts. This means $\exists$ chart $(\Psi, \mathbb{X}, \mathbb{Y})$ around any $q \in F(M) \subseteq N$ s.t. $\Psi(\mathbb{X} \cap F(M)) = \mathbb{Y} \cap \{ \mathbb{R}^k \times \{0\}\}$. See picture from class for more proof.
+
+\textbf{Canonical Immersion Theorem:} When $k \leq n$, $\exists$ charts $\{ \phi, U, V\}$ and $\{ \psi, X, Y\}$ s.t. (see figure) $\psi_1 \circ F \circ \phi_1^{-1}|_{v_1} = i |_{v_1} : \underset{(x_1, \dots, x_k)}{\mathbb{R}^k} \rightarrow \underset{(x_1, \dots, x_k, 0, \dots, 0)}{\mathbb{R}^n}$.
+\begin{itemize}
+    \item $F$ is a homeomorphism onto its image, So $F(U_1)$ is open. 
+    \item $\exists$ an open set $X < N$ s.t. $F(U_1) =  F(M) \cap X$. Let:
+    \begin{align*}
+        \mathbb{X} &= X_1 \cap X \\
+        \mathbb{Y} &= \psi_1 (\mathbb{X}) \\
+        \Psi &= \psi_1
+    \end{align*}
+    \item Check
+    \begin{align*}
+        \Psi ( \mathbb{X} \cap F(M) ) &= \mathbb{Y} \cap \psi_1 (F(U_1)) \\ 
+        &= \mathbb{Y} \cap i(\phi_1(u_1)) \\
+        &= \mathbb{Y} \cap \{ \mathbb{R}^k \times \{0\}\}
+    \end{align*}
+\end{itemize}
+
+\textbf{Remarks:} Note the difference btwn immersion and embedding. 
+\begin{itemize}
+    \item If $F: M \rightarrow N$ is a smooth immersion, then canonical immersion theorem that $\forall p \in M \exists$ a nbhd $U \subset M$ s.t. its image $F(U)$ is "nice" in $N$. 
+    \item Compared to an embedding... If $F: M \rightarrow N$ is a smooth embedding, then by theorem, $\exists q \in F(M) \subseteq N; \exists $ a nbhd. of $F(M)$ that is nice in $N$. 
+\end{itemize}
+
+\textbf{Example} to keep in mind for the difference btwn. the two. $\gamma : \mathbb{R}^1 \rightarrow \mathbb{R}^2$. Immersion happens when two points from lower space go to one point in higher dimension. However, can make the higher dimension work with "Surgery" to make it more tractable (beware of assumptions!). 
+
+\textit{Recall:} Smooth emedding consists of two parts:
+\begin{enumerate}
+    \item Injective immersion
+    \item Top. embedding homeo onto its image
+\end{enumerate}
+
+Often, you want to loosen these conditions, and focus on on injective immersions. We call the image of the injective immersion an immersed submfd. where $F: M \rightarrow N$ and $F(M) < N$. 
+
+\textbf{Example} $\gamma: \mathbb{R}^1 \rightarrow \mathbb{R}^2$, would be a line going to a point and limiting its domain. Unlike embeded submfds, the 2 natural topologies of an immersed submfd. is:
+\begin{enumerate}
+    \item from the $topM$ via the map $F$. 
+    \item from the subspace top. of $N$. 
+\end{enumerate}
+
+Immersed submfd. generally are not embedded. There are some connections still, but the local structure of the two are the same...
+
+\textbf{Prop:} (Immersed submfd. are locally embedded) If $M$ is a smooth mfd. and $S \subseteq N$ is an immersed submfd., then $\forall p \in S, \exists $ a nbhd. $U \subseteq S$ of $P$ s.t. $U$ is an embedded submfd. of $M$. 
+
+\textbf{Proof.} Follows from 
+Local Embedding Thrm. Suppose $M,N$ are smooth mfds. and $F: M\rightarrow N$ is a smooth map. Then, $F$ is a smooth immersion iff $\forall p \in M$ has a nbhd. $U \subseteq M$ s.t. $F|_U : U \rightarrow N$ is a smooth embedding. 
+
+\textbf{Proof of Local Embedding Thrm.} (going back first) If $F|_U: U \rightarrow N$ is a smooth embedding, implies the $rank F = \dim U = \dim M$ everywhere, then $F: M \rightarrow N$ is an immersion. (now going forward) Suppose $F$ is an immersion, and $p \in M$, then Canonical Immersion Theorem (CIT) $\implies \exhsts nbhd U$ of $P$ s.t. $F|_{U_1}$ is injective. We need to show $F$ is a top. embedding for some nbhd. $U \subsetq U_1$ of $P$. This follows from Closed Map Lemma (Lee A.S.2) that says, if $X$ is a compact space and $Y$ is Hausdorff and $F: X \rightarrow Y$ is continuous injective, then $F$ is a top. embedding. Also, closure $\Bar{U} \subseteq U_1$.
+
+
+
+
+\end{document}

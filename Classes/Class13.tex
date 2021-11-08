@@ -1,0 +1,87 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{13}                  % <-- homework number
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review of Coord. Basis}
+
+For $T_PM$, we have a coord basis $\{ \frac{\partial }{\partial x^i}|_P\}$ = $d\phi^{-1} (\frac{\partial }{\partial x^i})$.
+
+If $F:M\rightarrow N$ is a smooth map $\{ \frac{\partial }{\partial y^j}|_{F(P)}\}$, with chart $\{\phi, u, v\}$, is called a coord. basis of $T_{F(P)}N$. Then, $dF_P(\frac{\partial }{\partial x^i}|_P) = \frac{\partial \hat{F}}{\partial x^i }|_P \frac{\partial }{\partial y^j}|_{F(P)}= \frac{\partial y^j}{\partial x^i}|_P \frac{\partial}{\partial y^j}|_{F(P)}$, where $\hat{F} = (y^1(x), \dots, y^m(x))$. In particular, if $F:M \rightarrow N$ and $F(P) = P$ this implies(?) $\frac{\partial}{\partial x^i}|_P = \frac{\partial y^j}{\partial x^i} \frac{\partial}{\partial y^j}|_P$.
+
+As an example: On $\mathbb{R}^2$, the standard (x,y) and polar (r, $\theta$), then $x=r\cos(\theta)$ and $y=r\sin(\theta)$ and $r= \sqrt{x^2 + y^2}$ and $\tan\theta = y/x$. Then $\frac{\partial}{\partial r} = \frac{\partial x}{\partial r}\frac{\partial}{\partial x} + \frac{\partial y}{\partial r}\frac{\partial }{\partial y} = \cos\theta \frac{\partial }{\partial x} +  \sin\theta \frac{\partial }{\partial y}= \frac{x}{\sqrt{x^2 + y^2}}\frac{\partial}{\partial x} + \frac{y}{\sqrt{x^2 + y^2}}\frac{\partial}{\partial}$ and $\frac{\partial}{\partial \theta}= \dots$undergoes a similar transformation...
+
+In an open nbhd $u \subseteq M$, the coordinate $x^i: M \supseteq U \rightarrow \mathbb{R} $ and $dx^i_P: T_PU \cong T_PM \rightarrow T_{x^i_p} \mathbb{R} \cong \mathbb{R}$.
+
+So, $dx^i_P$ maps a tangent vector into a number: $V^P: V \rightarrow \mathbb{R}$ is the dual vector space (cotangent vector space). So, $dx^i_P \in T_P^*M$ the dual space of $T_PM$ is called the "cotangent space" and $dx_P^i$ is a "cotangent vecotr".
+
+More generally, $\forall f: M\rightarrow \mathbb{R}$ a smooth function, the differential $df_P: T_PM \rightarrow T_{f(P)} \mathbb{R} \cong \mathbb{R}$ is a cotangent vector at p. 
+
+Ok, so, give $V = v^i \frac{\partial}{\partial x^i}|_P$, we can calculate:
+\begin{align*}
+    dx_p^i(v) &= dx^i ( v^k \frac{\partial }{\partial x^k}|_P ) \\
+    &= v^k \frac{\partial x^i}{\partial x^k}|_P \\
+    &= v^i (p)
+\end{align*}
+
+For $T_PM$ with coord. basis $\{ \frac{\partial }{\partial x^1}|_P, \dots, \frac{\partial}{\partial x^n}|_P\}$. Where $\{ dx^1|_P, \dots, dx^n |_P \}$ is the dual coord. basis of $T_P^*M$.
+
+Prop. If $U$ is an open nbhd of $p \in M$ and $f: U \rightarrow \mathbb{R}$ is a smooth function, then $df_P = \frac{\partial f}{\partial x^i }dx^i|_P$.
+
+Proof: $df_P(v) = =v(f) = v^i \frac{\partial }{\partial x^i}|_P f = \frac{\partial f}{\partial x^i}dx^i|_P (v)$.
+
+Corollary: Suppose on $M$, have coord systems $(x^1, \dots, x^n)$ and $(y^1, \dots, y^m)$ are two smooth coord. systems defined in a nbhd. $p \in M$, then $dy^j|_P = \frac{\partia y^j}{\partial x^i}dx^i |_P$.
+
+A vector space and its dual are similar (or tangent space and contangent space). 
+
+$V = v^i \frac{\partial }{\partial x^i} \in T_P M$... See picture from class for comparison between space and its dual. Left side is tangent space, right side is cotangent space. 
+ 
+Two  remarks: 1. For a smooth map $F: M \rightarrow N$ on a smooth manifold. We can pullback $F^*: C^{\infty} \rightarrow C^* (M)$ and $g \rightarrow g\circ F$ and $F^*: T^*_{F(P)} N \rightarrow T_P^* M$ and $\alpha \rightarrow F_P^* (\alpha)$. And the pushforward $F_*: T_PM \rightarrow T_{F(P)} N$ and $V \rightarrow dF_P (v)$. So, If $F:M \rightarrow N$ is a diffeo then $(F_*)_P : T_PM \rightarrow T_{F(P)} N$ and $(F^*)_P : T^*_{F(P)}M \rightarrow T^*_P N$ are both isomorphisms. 
+ 
+\end{document}

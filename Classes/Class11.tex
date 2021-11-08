@@ -1,0 +1,114 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{11}                  % <-- homework number
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review: Tangent Spaces and Bundles}
+A Tangent Bundle of $M$ is $TM = \bigcup_{p \in M} T_P M$. 
+
+There is a natural projection:
+\begin{align}
+    \pi : TM \rightarrow M \\
+    X_P \rightarrow P \\
+    T_P M = \pi^{-1}(P)
+\end{align}
+
+So, $T_PM$ is a local object. Only care about local neighborhood.
+
+If $P \subseteq U$ an open nbhd around p, then $T_P M \cong T_P U$.
+
+Prop: If $f=c$ a constant in a nbhd of $p \in M$ then $X_p(f)=0$. The PROOF: Let $\phi$ be a smooth function that equals 1 near p and 0 at pts. where $f\neq c$, then $(f-c)\phi = 0 $ so then composition of two functions lets us do Leibniz rule, so $[X_P(f-c)]\phi + (f-c) X_P(\phi)$. Another bump function! More nicely:
+\begin{align}
+    0 = X_P[(f-c)(\phi)] \\
+    = [X_P(f-c)]\phi + (f-c) X_P(\phi)] \\
+    = X_P(f)
+\end{align}
+
+Remark: If $f=g$ is a nbhd. of P, then $X_P(f) = X_P(g)$ i.e. $X_P(f)$ is determined only by the value of f near p. (local property).
+
+$X: C^{\infty}(M) \rightarrow \mathbb{R}$.
+
+\textbf{Differentials:} Maps between tangent spaces. Assuming given $F: M \rightarrow N$ that relates two smooth manifolds. Point p maps to some point F(p) by some map, F. The tangent space in the new tangent space is $T_PM \rightarrow T_{F(P)}M$. The $dF_P$ maps from the tangent vectors in the original space to the new space. Showing in Euclidean space first... Back to $\mathbb{R}^N$.
+
+Two open sets, $U \subseteq \mathbb{R}^n, V \subseteq \mathbb{R}^m$. Then the smooth map will be ...
+\begin{align}
+    F: u \rightarrow V \\
+    (x_1, \dots, x_n) \rightarrow F(x) = (y_1(x), \dots, y_m(x))
+\end{align}
+
+A vector $v^i \frac{\partial}{\partial x^i} f(x) \big|_p$ defines a vector on $T_{F(p)}V$ as follows:
+
+Recall: $F: M \rightarrow N$
+
+Pullback $F^* : C^{\infty}(N) \rightarrow C^{\infty}(M)$ and $g \rightarrow F^*(g) = g \circ F$. So, $v^i \frac{\partial}{\partial x^i} F^*(g) = v^i \frac{\partial}{\partial x^i} [g(y(x))]$. Since taking a derivative wrt x, take the chain rule!. 
+\begin{align}
+    v^i \frac{\partial}{\partial x^i} F^*(g) = v^i \frac{\partial}{\partial x^i} [g(y(x))] \\
+    = v^i \frac{\partial g}{\partial y^i} \frac{\partial y^j}{\partial x^i}, i=1, \dots, n; j=1, \dots, m \\
+    = v^i \frac{\partial y^j}{\partial x^i} \frac{\partial}{\partial y^i} g
+\end{align}
+
+We now have the main jacobian matrix. So, multiplied $v^i$ by $\frac{\partial y^j}{\partial x^i}$ is the $m x n$ Jacobian matrix $dF_P$.
+
+Leads to the deffinition: Let $F: M \rightarrow N$ be a smooth map. Then for each point $p \in M$, the differential of F is the linear map denoted b $dF_P: T_PM \rightarrow T_{F(P)} N$ is defined by $dF_P(X_P)(g) = X_P (g \circ F) \forall g \in C^{\infty}(N), X_P \in T_PM$. 
+
+This is how we map tangent vectors, but notice: Functions that get "pull-back" under F, the Tangent vectors that get "Push-forward" under F. 
+
+So we want to make sure  that $dF_P(X_P)$ satisfies tangent vector properties. Check that $dF_P(X_P)$ is a derivation for any $X_P \in T_P M$. 
+\begin{enumerate}
+    \item 1. check Leibniz rule (product rule). So, by definition $dF_P(X_P)(gh) = X_P(gh \circ F) $. Note that this is $gh(F(x)) = g(y)h(y), F(x) = y$. So now, it's:
+    \begin{align}
+        =X_P[(g \circ F) (h \circ F)] \\
+        = [X_P(g \circ F)] (h \circ F) + (g \circ F) [X_P(h \circ F)] \\
+        = [dF_P(X_P) g)]h(F(P)) + g(F(P))[dF_P(X_P)h ]
+    \end{align}
+\end{enumerate}
+
+Example: Velocity vectors of curves. Let $\gamma : \mathbb{R} \rightarrow M$ be a $C^{\infty}$ in $M$ with $\gamma(t_0)=P$. So $d/dt$ is the "unit" tangent vector on $\mathbb{R}^1$. Then for any $ f \in C^{\infty}(M)$ you have $d\gamma (d/dt)|_{t_0}f = d/dt (f(\gamma))|_{t_0}$ sometimes written as $\frac{d\gamma}{dt}|_{t_0} = \gamma(t_0) := d\gamma(d/dt)_{t_0}$ is the tangent vector of the curve at $p = \gamma(t_0)$ curve at called the "velocity of $\gamma$ at $t_0$.
+ 
+\end{document}

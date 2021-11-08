@@ -1,0 +1,136 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{3}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Topological Spaces Cont.}
+Continuous maps on open sets, particular homeos and diffeos.
+
+
+There are more properties of topological spaces that he's going to skip. See Appendix A. 
+\begin{itemize}
+  \item Compactness (go to Appendix A)
+  \item Connectedness of a space
+  \begin{itemize}
+    \item A top. space $X$ is called disconnected if $\exists$ two non-empty, open, subsets $V$ & $W$ of $X$ s.t. $V \cup W = X$ or $V \cap W = \mathbf{0}$
+    \item It is called connected if it is not disconnected
+    \item If $X$ is disconnected then any maximal connected subset of $X$ is called connected component of $X$
+  \end{itemize}
+  \item A top. space $X$ is path-connected is $\any$ $p,q \in X$. A  path can be any path between 0 to 1. So, $\exists$ a continuous map $f: [0,1] \rightarrow X$ s.t. $f(0)=p$ and $f(1)=q$. Call this a "path"
+  \item Path-connected implies connectedness. However, connected does not impy path-connectedness. Path-connected has a strong condition.
+  \begin{itemize}
+      \item Ex. Topologist's sine curve. $X = \{$graph of $y=sin(1/x), 0 \leq x \leq 1\} \cup \{(0,0)\}$. Here, using an "induced topology of $\mathbf{R}^2$. So, we can say it's connected but not path-connected between the zero point and the function. This is an "unreasonable space"...
+  \end{itemize}
+  \item We want to work with "reasonable" spaces that allow us to do analysis on them. We want to impose conditions/restrictions on topological spaces. Thus!
+\end{itemize}
+\subsection{Topological Manifolds}
+Defn: An n-dimensional topological manifold (mfd.), M, is a top. space s.t. 
+\begin{itemize}
+    \item M is Hausdorff
+    \item M is 2nd countable
+    \item Locally Euclidean of dimension 'n'. Thus, locally homeomorphic(?).
+    \begin{itemize}
+        \item $\forall p \in M$ We want to define an open set u around our point p on M that is... We want to map our open set as a homeomorphism from u into v on a $\mathbf{R}^n$ manifold. Euclidean comes with coordinate systems! This is nice for some things
+        \begin{itemize}
+            \item u is an open subset containing p
+            \item V is an open subset in $\mathbf{R}^n$
+            \item $\exists \phi : u \rightarrow v$ a homeomorphism
+        \end{itemize}
+        \item The triple $\{\phi, u v\}$ is called a coordinate chart around $p \in M$.
+        
+    \end{itemize}
+\end{itemize}
+
+Why do we care about Hausdorff spaces? Def: A top. spce $X$ is Hausdorff if $\any x, y \in X$ and $x \neq y$, $\exists$ open sets U and V s.t. $x \in U$ and $y \in V$, and $U \cap V = \mathbf{0}$. 
+\begin{itemize}
+    \item Ex. $X = {1,2,3,4} $
+    \begin{itemize}
+        \item trivial $A = \{0,X\}$
+        \item $A = \{0, X, \{1\}, \{1,2\}\}$
+        
+    \end{itemize}
+    \item Hausdorff ensures top. space is not too trivial (i.e. enough open sets to do analysis.)
+\end{itemize}
+
+Def. It's (Hausdorff) 2nd countable if $\exists$ a countable sub-collction A of A s.t. any open set is a union of (not necessarily finite) open sets. 
+\begin{itemize}
+    \item 2nd countable property restricts the number of open sets a top. space can have. 
+\end{itemize}
+
+Example. $\mathbf{R}^n$ with the metric topology 
+\begin{itemize}
+    \item Hausdorff
+    \item 2nd countable (usually use rational numbers) and take A to be an open set of all balls (sometimes called disks)with center rational points that is defined by its center and rational radii to give you a countable object.
+\end{itemize}
+
+Comments: The 3 conditions of a top. mfd. are independent. 
+
+Example: An uncountable disjoint union of real lines is both Hausdorff and locally Euclidean BUT not 2nd countable.
+
+Example: Two lines that cross in the middle. Hausdorff and 2nd countable, BUT  not locally Euclidean bc of the intersection that is a singularity that cannot be modeled just by a straight line. 
+
+Hausdorff Property => Limit of convergence of a sequence is unique.
+\begin{itemize}
+    \item $\{ a_n \}$ converges if $\exists a \neq b$  and $a_n \rightarrow a$, $a_n \rightarrow b$ for $n>N$ is a contradiction
+    \item Hausdorff w/ 2nd countability is required for property (later) \textit{partition of unity}
+\end{itemize}
+
+For topological mfds, connectedness implies path-connectedness. We can prove this!
+
+Pf: Let $p \in M$ and let $A = \{ q \in M | \exists$ a path from $p$ to $q\}$. Here, $A \neq \mathbf{0}$ (A isn't an empty set).
+
+Claim: A and $A^c = M\backslash A$ are both open (but this is weird since if one is open, the other must be closed...). So, for a connected top. space $X$, the only open and closed subsets are $\mathbf{0}$ and $X$. However, since $A \neq \mathbf{0}$, then $A=M$.
+
+Proof of claim. Given any point $x \in M \exitst$ a neighborhood of $x$ which is homeomorphic to a n open ball of $\mathbf{R}^n$ for some n. 
+
+A top. manifold has at most countable connected components each of which is a top. mfd. This statement can generalize the fact that any open set in $\mathbf{R}^n$ is a countable union of connected open domains. 
+
+\end{document}

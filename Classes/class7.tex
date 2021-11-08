@@ -1,0 +1,109 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{7}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Smooth Mfds. (M, a)}
+\begin{itemize}
+    \item Top. mfds. with an equivalence class of atlases. Where $a$ is the smooth structure. 
+    \item How do we compare smooth manifolds?? 
+\end{itemize}
+
+We need to have some way to determine when two smooth mfds are the same or equivalent. We can consider how we can map between the two and think about if you have subspace and transport it over. Or, if you go around in a loop, what happens after you go around in a loop.
+
+\textbf{Consider mapping between 2 manifolds}. So, $M \xrightarrow{\text{f}} N$. 
+
+Recall: Smooth maps. A smooth function is $f: M \rightarrow \mathbb{R}$ 
+
+For any chart, $\{ \phi_{\alpha}, u_{\alpha}, v_{\alpha}\}$ in $a$ (chart) and require the composition $\f \circ \phi_{\alpha}^{-1}$ is a smooth function. This is a map from an open set in $\mathbb{R}^n$ to $\mathbb{R}$.
+
+\textbf{Remark.} 
+\begin{itemize}
+    \item The set of all smooth functions on $M$ is denoted by $C^{\infty}(M)$
+    \item Notice that $C^{\infty}(M)$ is an algebra, i.e. if $f,g: M \rightarrow \mathbb{R}$ are smooth, then $af + bg: M \rightarrow \mathbb{R} \forall a,b \in \mathbb{R}$. Also has multiplication.
+\end{itemize}
+
+NOW, we want to replace the $\mathbb{R}$ from a line to another smooth manifold. So, now, $f: M \rightarrow N$, where $N$ replaces $\mathbb{R}$ (new picture). Question from class: how do we know if the map from $M$ to $N$ is a smooth function? We have to take advantage of our knowledge of eucldiean geometry to map from $\mathbb{R}^n$ to $\mathbb{R}^m$ by $\psi_{\beta} \circ f \circ \phi_{\alpha}^{-1}$.
+
+Def: Let $M$, $N$ be smooth mfds. 
+\begin{equation}
+    f: M \rightarrow N
+\end{equation}
+be a continous map, then $f$ is smooth if for any chart $\{ \phi_{\alpha}, u_{\alpha}, v_{\alpha}\}$ of $M$ and $\{ \psi_{\beta}, X_{\beta}, Y_{\beta}\}$ of $N$. And, 
+\begin{equation}
+    \psi_{\beta} \circ f \circ \phi_{\alpha}^{-1} : \phi_{\alpha} (u_{\alpha} \cap f^{-1}(X_{\beta})) \rightarrow \psi_{\beta}(f(U_{\alpha}) \cap X_{\beta})
+\end{equation}
+
+We say $f$ is a diffeo if $f$ is bijective and both $f$ and $f^{-1}$ are smooth. If we say $M$ and $N$ are diffeomorphic to each if $\exists$ a diffeo. $f: M \rightarrow N$.
+
+Examples of smooth functions
+\begin{enumerate}
+    \item The inclusion map $i: \mathbb{S}^n \rightarrow \mathbb{R}^{n+1}$ is smooth (need to show that charts are smooth maps!) since $i \circ \phi^{-1}_{\pm} (y_1, \dots, y_n) = \frac{1}{1+|y|^2}(2y, \dots, 2y_n, \pm (1 - |y|^2)$. \textbf{Charts are just the coordinates of spaces (like in physics).}
+    \item Recall $\mathbb{R}^{n+1} \backslash \{0\} = \mathbb{R}\mathbb{P}^n$ where $ x \sim tx$. So the Quotient map, $\pi: \mathbb{R}^{n+1} \backslash \{0\} \rightarrow \mathbb{R}\mathbb{P}^n$, now:
+    \begin{equation}
+        \psi_i \circ \pi(x_1, \dots, x_{n+1} ) = \phi_i [x_1:x_2, \dots : x_{n+1}] = (\frac{x_1}{x_i}, \dots, \frac{x_{i-1}}{x_i}, \frac{x_{i+1}}{x_i}, \dots \frac{x_{n+1}}{x_i}), x_i \neq 0
+    \end{equation} is smooth for all $i$ from $\mathbb{R}^{n+1} \backslash \{0\}$ to $\mathbb{R}^n$
+    \item If 2 atlases $a = \{ \phi_a, u_a, v_a\}$ (used a instead of alpha), and $B = \{ \phi_B, u_B, v_B\}$ of $M$ are equivalent, iff the identity map $\mathbb{1} : (M,a) \rightarrow (M, B)$ is a diffeo. Check that $\phi_B \phi_a^{-1}$ is smooth (and a transition function).
+    \item For $\mathbb{R}^1$ we gave 2 inequivalent smooth structures, one was $a = \{ \phi_1, \mathbb{R}, \mathbb{R}\}$ and $B = \{ \phi_2, \mathbb{R}, \mathbb{R}$, where $\phi_1(x)=x$ and $\phi_2(x)=x^3$. Diffeos require us to look at the charts! So, we need a map $f:(\mathbb{R}, a) \rightarrow (\mathbb{R}, B)$ and we want to look at and choose a certain $f$ (e..g $x^{1/3}$) so $\phi_2 f \phi_1(x) = x$ is a diffeo. So, we found that 2 atlases are diffeo to each other.TLDR can have different smooth maniflds based on the same topological mfd. to be diffeomorphic. We're basically giving a coordinate system on both, and we need a coordinate transformation relating one to another.
+\end{enumerate}
+QUESTION: Do there exist top. mfds. that admit different (i.e. non-diffeo) smooth structures? (Yes) 1960s - Milnor & Kervaire showed that $S^7$ as a top. mfd. admits exactly 28 different smooth structures.
+
+\begin{itemize}
+    \item For $\mathbb{R}^n$ and $n\neq 4$ has a unique smooth structure up to a diffeo.
+    \item  $\mathbb{R}^4$ (Donaldson, Freedman) early 80s, $\exists$ uncountably many distinct smooth structure, no two of which are diffeo. to eachother.
+    \item Every top. mfd. of $dim \leq 3$ has a unique smooth structure up to a diffeo. So don't worry if in these low dims of diffferent smooth structures. 
+    \item For compact mfds of $dim \geq 4$, the number of smooth structures is finite.
+    \item For $\mathbb{S}^4$, it's not known how many smooth structures? The poincare conjecture suggests that only one smooth structure exists, but not proven.
+\end{itemize}
+
+
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{8}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review: Smooth Mfds}
+
+\begin{itemize}
+    \item Smooth mfds
+    \item Smooth functions/maps
+    \item Do calculus 
+    \begin{itemize}
+        \item Differentiation
+        \item Integration (next quarter)
+    \end{itemize}
+\end{itemize}
+
+Calculus 101: $M = \mathbf{R}^1$ and $f: \mathbf{R} \rightarrow \mathbf{R} $ is just $\frac{df}{dx}|_a = \lim \frac{f(x)-f(a)}{x-a}$. HOWEVER, now have $M=\mathbb{R}^n$ where $f: \mathbb{R}^n \rightarrow \mathbb{R} $ cannot really divide by a difference between two vectors $\mathbf{x} - \mathbf{a}$. Instead, we have directional derivative that defines how $\mathbf{x} \rightarrow \mathbf{a}$ along a fixed vector $\mathbf{v}$, such that $\mathbf{x} = \mathbf{a} + t\mathbf{v}$. 
+
+Now, $D_\mathbf{v} f(\mathbf{a}) = \frac{d}{dt}f(\mathbf{a} + t \mathbf{v)}|_{t=0}$ is well-defined. 
+
+Remark: In $\mathbb{R}^n$, $\mathbf{v} = v^1 e_1 + \dots + v^n e_n$ where $\{ e_1, \dots, e_n\}$ is a basis of unit vectors. 
+
+Then, without using Einstein notation, $D_\mathbf{v} f(\mathbf{a}) = \sum_i \frac{df}{dx^i}\frac{dx^i}{dt}|_{t=0} = v^i \frac{\partial }{\partial x}f(x)|_{x=a}$. So, we see that $D_v: C^{\infty}(\mathbb{R}^n) \rightarrow \mathbb{R}$. Associate $\{$ vector at $\mathbf{a}\} \rightarrow \{$ Derivative $D_v: C^{\infty}(M) \rightarrow \mathbb{R}$
+
+In summary, represent the vector at a point as  the derivative. Think of it like tangent vectors at a pt. p on $S^2$. We can draw the vector in $\mathbb{R}^3$ like $\Bar{v} = v^i e_i$ where $\{ e \}$ is a standard basis of $\mathbb{R}^3$. 
+
+We have local charts with coordinates and smooth functions! 
+\begin{equation}
+    \phi : u \subseteq M \rightarrow V \subseteq \mathbb{R}^3
+\end{equation}
+\begin{equation}
+    \phi : p \rightarrow (x^1(p), \dots, x^n(p))
+\end{equation}
+
+We can define a "vector" as a derivetive: $V=v^1 \frac{\partial}{\partial x^1} + \dots + v^n \frac{\partial}{\partial x^n}$.
+
+Vectors on smooth manifolds are written as derivatives. We use Euclidean sense of directions to turn things into derivatives that represents a direction. Ohhh, need to introduce an \textbf{inner product} before defining a unit vector, which is important for making a metric and turning it into a Riemannian mfd. 
+
+\begin{itemize}
+    \item $D_{\mathbf{v}}$ has the following properties:
+    \begin{itemize}
+        \item For any $f, g \in C^{\infty} (\mathbb{R}^n), D_{\mathbb{v}}$ satisfies 1) linearity $D_{\mathbb{v}}(af + bg) = aD_{\mathbb{v}}f + bD_{\mathbb{v}}g$ , $\forall a,b \in \mathbb{R}$, and 2) Leibniz Rule $D_{\mathbb{v}}(fg) = D_{\mathbb{v}}(f)g + f D_{\mathbb{v}}(g)$
+    \end{itemize}
+    \item an operator $D: C^{\infty}(\mathbb{R}^n) \rightarrow \mathbb{R}^1$ satisfying two properties is called a derivative or a derivation at $\mathbf{a}$.
+\end{itemize}
+
+Note: If f=c is a constant then $D(f)=0$, we can show: By (2) that $D(1)=D(1*1) = 2D(1)$ so, $D(1)=0$, and, by (1) $D(c*1) = cD(1) = 0$.
+
+Identification of vectors with derivatives motivates the following:
+
+Defn: Let $M$ be an n-dim. smooth mfd., such that a tangent vector at a pt. $p \in M$ is a $\mathbb{R}$-linear map $X_p: C^{\infty}(M) \rightarrow \mathbb{R}$ satisfying the Leibniz Rule:
+\begin{equation}
+    X_p(fg) = X_p(f)g + gX_p(g), \forall f, g \in C^{\infty}(M).
+\end{equation}
+
+\begin{itemize}
+    \item The set of all tangent vectors of $M$ at $p$ is a linear space. We denote this space by $T_pM$, which is called the "tangent space of $M$ at point, $p$.
+\end{itemize}
+
+There's an equivalent way of writing tangent vectors. A more geometric way to define tangent bectors:
+
+Let: chart $\{ \phi, u, v \}$ be a chart around point p in $\mathbb{R}^n$ with smooth map $\phi$. Can look at all the curves that move along the space ($r(t)$)  that is mapped to a line, t, that maps into the manifold. Let $\Gamma_p$ be the set of all smooth curves $\gamma: (-\epsilon, \epsilon) \rightarrow U$, then $\gamma(0)=p$. We define an equivalence relation on $\Gamma_p$ by $\gamma_a \sim \gamma_b <-> \frac{d(\phi \circ \gamma_a)(0)}{dt}(0) = \frac{d(\phi \circ \gamma_b(0)}{dt}(0)$. Then $T_pM = \Gamma/~$
+ 
+\end{document}

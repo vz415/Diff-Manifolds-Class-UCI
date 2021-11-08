@@ -1,0 +1,100 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{13}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review of Monday (Diego's Notes)}
+
+We have smooth map $F: M \rightarrow N$ and $dF_P : T_PM \rightarrow T_{F(P)} N$ is a linear map. We use $dF_P $ to analyze $F$. If $dimM = dimN$ and $dF_P$ is an isomorphism, then $F$ near $p$ is a local diffeo.
+
+If $dF_P: T_P M \rightarrow T_{F(P)} N$ is surjective, then $dimM \geq dimN$ and $f$ is a "submersion"  at p. However, if it's injective, then $dimM \leq dimN$ and we say $f$ is an immersion at $p$. 
+
+We say that $F$ is a \textit{smooth submersion} (or smooth immersion - depends on the context). If $dF_P$ is surjective (or injective) $\forall p \in M$, (smooth submersions means all tangent/vector spaces are injective).
+
+Also talked about 'canonical maps' or canonical examples of \textbf{submersion}. Here, denoting $dimM = m$ and $dimN = n$. For the submersion case
+
+\begin{itemize}
+    \item submersion case $m \geq n$
+    \begin{itemize}
+        \item Projection $\pi: \mathbb{R}^m \rightarrow \mathbb{R}^n$ and $(x_1, \dots, x_n, x_{n+1}, \dots x_m) \rightarrow (x_1, \dots, x_n)$
+    \end{itemize}
+    \item Immersion $m \leq n$
+    \begin{itemize}
+        \item Inclusion $i: \mathbb{R}^m \rightarrow \mathbb{R}^n$ and $(x_1, \dots, x_m) \rightarrow (x_1, \dots, x_m, 0, \dots, 0)$
+    \end{itemize}
+\end{itemize}
+
+Any smooth submersion/immersion is locally like the canonical example.
+
+\textbf{Canonical submersion (Immersion) Theorem}: Let $F: M \rightarrow N$ be a smooth submersion (immersion). For $p \in M$, $\exists$ charts $\{ \phi_1, u_1, v_1\}$ of $p$ and $\{ \psi_1, X_1, Y_1\}$ of $q = F(p)$. So, going to push down to the map onto the Euclidean space and look at $\psi_1 \circ F \circ \phi_1^{-1}|_{v_1} = \pi|_{v_1}$ ( and $\psi_1 \circ F \circ \phi_1^{-1}|_{v_1} = i|_{v_1}$ for immersion)
+
+Freedom of charts issue. Locally, you have a choice. Can use freedom so that the map locally is of canonical form. Can change to another form (freedom!). 
+
+\textbf{Proof: Submersion.}
+
+With manifold $p\in M$ with local nbhd U, and $F: M \rightarrow N$, where $q=F(P)$ and each has their local Euclidean spaces (see picture). For submersion, $d\hat{F}_{\phi(P)}$ is surjective map. Looking at the differential $\frac{\partial \hat{F}^i}{\partial x^i}$ is an $n \times m $ matrix of rank n at $\phi(p)$. By re-ordering the coord. system if necessary, we can assume that $\frac{\partial \hat{F}^i}{\partial x^j}, 1 \leq i,j \leq n$ is non-singular at $\phi(p)$. (The key is defining a new chart - freedom!). Define New map $G: V \rightarrow \mathbb{R}^m$  where $(x_1, \dots, x_m) \rightarrow (\hat{F}^1, \dots, \hat{F}^n, x_{n+1}, \dots, x_m)$. Well-defined new non-singular map. Remember $n < m$. Note, $\pi \circ G = \hat{F}$ and $dG$ is non-singular s.t. $\exists$ a nbhd. $V$ of $\phi(p)$ s.t. $G: V_0 \rightarrow G(V_0)= V_1$ is a diffeo. 
+
+Let $H = G^{-1} => \hat{F} \circ H = \pi$ and $U_1 = \phi^{-1} (v_0)$ and $\phi_1 = G \circ \phi$. So, $(\phi_1, u_1, v_1)$ is a chart around $p$ and $\psi \circ F \circ \phi^{-1} = \psi \circ F \circ \phi^{-1} \circ G^{-1} = \hat{F} \circ H = \pi|_{v_1}$. Just a bunch of linear algebra!
+
+\textbf{Proof: Immersion.}
+
+Case when $m \leq n$. Here, the Jacobian is an $n \times m $ matrix $\frac{\partial \hat{F}^i}{\partial x^j}$ with more rows than column. Now we want to rearrange the rows, which is like rearraning the coordinates of $\mathbb{R}^n$. We just cut and rearrange so that the matrix is non-singular matrix.
+
+Locally, we have canonical form, so what can happen globally?
+
+Ex. $\gamma = \mathbb{R}^1 \rightarrow \mathbb{R}^2$. Line going to plane is like a line going along the plane. In this case, $d\gamma_P$ is injective $\forall p \in \mathbb{R}$, but now we can think about a more global picture of the map and see that $\gamma$ is not injective if two points over the line overlap on the higher dimensional space!
+
+Ex. (Figure 8 curve example). $\beta : (-\pi, \pi) \rightarrow \mathbb{R}^2$ and $t \rightarrow \beta(t) = (\sin2t, \sin t)$. It's injective bc there are no overlapping points! (barely). But does not look like an interval since it looks like a closed line on $R^2$. We want to see if the image looks similar to something in parent space.
+
+Interested in immersion that are homeo to our original space. \textbf{Def:Smooth embedding. } Embedding is a stronger term. Let $M, N$ be smooth mfds. A smooth embedding of $M$ into $N$ is (1) smooth immersion $F: M \rightarrow N$ and (2) is a topological embedding, i.e. a homeo onto its image $F(M) \leq N$ in the subspace topology. This is a smooth embedding. 
+
+
+\end{document}
+ 

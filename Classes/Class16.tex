@@ -1,0 +1,99 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{16}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Smooth Embedding of a Map $F:M \rightarrow N$}
+There are 2 conditions:
+\begin{itemize}
+    \item Smooth immersion $dF_P$ injective $\forall p \in M$
+    \item Top. embedding (different than smooth) that's a homeo onto its image $F(M) \subseteq N$ in the subspace topology. 
+\end{itemize}
+Examples: $R^1 \rightarrow R^2$ is a curve. For smooth embedding want no overlaps.
+
+Smooth embeddings need both conditions to be satisfied. 
+
+Ex. $\gamma: \mathbb{R}^1 \rightarrow \mathbb{R}^2$, and $t \mapsto \gamma (t) = (t^3, t^5).$ So we have smooth map, top. embedding, but is not a smooth immersion bc the tangent space at (0,0) is the zero vector, which doesn't satisfy this property. i.e. $\gamma ' (t=0)= (0,0)$. 
+
+Ex. Figure 8 curve. $\beta: (-\pi, pi) \rightarrow \mathbb{R}^2$ and $t \mapsto \beta (t) = (\sin 2t, \sin t)$. We can check the smooth immersion by checking $\beta '(t) \neq 0, \forall t \in (-\pi, \pi)$. Not a top. embedding. Image is compact but the domain $(-\pi, \pi)$ is not. Thus, not a smooth embedding.
+
+Ex. A dense curve on the torus (Lee, Ex: 4.20). $T^2 = S^1 \times S^1 \subset \mathbb{C}^2$. So, it's domain is $(e^{i2 \pi \theta_1}, e^{i2\pi \theta_2})$ and we're interested in map $\gamma: \mathbb{R}\rightarrow T^2$ and $t \mapsto \gamma (t) = ((e^{i2 \pi t}, e^{i2\pi \alpha t}))$, where $\alpha$ is irrational. Because $\alpha$ is irrational, it will cover the entire torus (no repeats like the rationals!). So it has a smooth immersion and is injective, but it's not a top. embedding bc we have to use a subspace. $\gama (t)$ is not a smooth mfd. in the subspace topology. We can see that $\gamma (t)$ is locally path-connected. 
+
+\textbf{Defn. of smooth embedding} is not always easy to check directly. At least, should be a smooth embedding is an injective immersion. There are sufficient conditions to ensure a smooth embedding. 
+
+\textbf{Lee Prop. 4.2.2} If $F: M \rightarrow N$ is an injective immersion, then $F$ is a smooth embedding if:
+\begin{itemize}
+    \item a) $F$ is an open or closed map
+    \item b) $F$ is a proper map
+    \item c) $M$ is compact
+    \item d) $M$ has empty boundary and $\dim M = \dim N$
+\end{itemize}
+
+For embeddings, we can also treat them as a subset of smooth mfds. 
+
+\textbf{Terminology}
+\begin{itemize}
+    \item Defn. A submanifold is a smooth mfd. that is the subset of some other smooth mfd. 
+    \item Defn. A subset $ S \subset M$ is a k-dim. embedded submanifold of $M$ if $\forall p \in S, \exists $ a chart $\{\phi, U, V\}$ around $p$ in $M$ s.t. $\phi(U \cap S) = V \cap \{ \mathbb{R}^K \times 0 \} = \{ x \in \phi(u) | x_{k+1} = \dots =x_n=0 \}$  i.e. locally $S$ has a "slice" chart. 
+\end{itemize}
+
+Exampes of embedded submanifolds. 
+\begin{itemize}
+    \item $\mathbb{R}^k \subset \mathbb{R}^n$ is a slice
+    \item $S^n \subset \mathbb{R}^{n+1}$. So, how to construct a local slice chart of $\mathbb{R}^{n+1}$ near every pt. of $S^n$? See Lee 5.9
+\end{itemize}
+
+For any smooth map $F: M \rightarrow N$, then graph $\Gamma_F = \{ (p, q) | q \in F(p), p \in M \}$ is an embedded submfd. of $M \times N$.
+
+Lee has a different defn. for embedded submfd rather than slice charts. They're equivalent, though.
+
+
+\end{document}

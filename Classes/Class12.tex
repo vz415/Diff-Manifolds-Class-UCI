@@ -1,0 +1,111 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{12}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section{Review:Smooth Map}
+Smooth map $F: M \rightarrow N$ and its differential $dF_P : T_P M \rightarrow T_{F(P)}N, \forall X_P \in T_PM$ where $g \in C^{\infty}(N)$ and $[dF_P (X_P)]_g = X_P (g\circ F)$  where the differential $dF_P$ is a $\mathbb{R}$-linear and satisfies Leibniz.
+
+Example: 
+\begin{align*}
+    F: \mathbb{R}^n_x \rightarrow \mathbb{R}^M_y \\
+    X_P = v^i \frac{\partial }{\partial x^i} \\
+    F = (y(x), \dots , y^m(x)) \\
+    dF_P(X_P) g = v^i \frac{\partial y ^ j}{\partial x ^ i}\frac{\partial }{\partial y^j} g
+\end{align*}
+
+Where $\frac{\partial y^j}{\partial x^i}$ is the Jacobian. 
+
+Now, let $f \in C^{\infty}(M)$, so $d\gamma (\frac{d}{dt}|_{t_0}f = d/dt(f(\gamma))|_{t_0}$. 
+
+Now, if $M = \mathbb{R}^n, \gamma = (x'(t), \dots, x^n(t))$ then $d\gamma (d/dt)|_{t_0}f = d/dt f(x(t))|_{t_0} = \frac{dx^i}{dt}\frac{\partial f}{\partial x^i}$, where everything except the $\partial f$ is the "velocity vector" in physics.
+
+\textbf{Properties of the differentials} Let M, N, P be smooth manifolds and $F: M \rightarrow N, G: N \rightarrow P$ be smooth maps and let $p \in M$, then 
+\begin{itemize}
+    \item a) $ dF_P: T_P M \rightarrow T_{F(P)}M$ is linear
+    \item b) (chain rule) $d(G \circ F)_P = dG_{F(P)} \circ dF_P$
+\end{itemize}
+
+Proof of b). $X_P \in T_P M$, $h\in C^{\infty}(P)$, so the pullback is: $\{[ d(G \circ F)_P)(X_P)]]\} h = X_P (h \circ G \circ F) = dF_P(X_P)(h \circ G) =  dG_{F(P)}[dG_{F(P)}[dF_P(X_P)]h$. And this is basically chain rule!
+
+\begin{itemize}
+    \item c). (The standard identity map) $d(Id_M)_P = Id_{T_PM}: T_PM \rightarrow T_PM$
+    \item d). If F is a diffeo., then $dF_P: T_PM \rightarrow T_{F(P)}N$ is an isomorpism and $(dF_P)^{-1} = (dF^{-1})_{F(P)}$. Can apply chain rule to find that $dF_P$ is invertible.
+\end{itemize}
+
+Corollary: If $dimM = n$ then implies that $T_PM$ is an n-dim linear space. 
+
+Proof: Last time, we argued - $T_PM$ is a local tangent space but only need to look at an open set around $T_P M$ such that $T_P M \cong T_P U$. So Given a smooth chart $\{ (\phi, u, v)\}$ consider $\phi$ as a map $\phi: u \rightarrowv$ is a diffeo. If $\phi$ is a diffeo, then $T_PM \cong T_pU \cong T_{\phi(P)}V \cong T_{\phi(P) \mathbb{R}^n}$ by prop. d) and this implies that $dim T_PM = n$. So $\phi: u\rightarrow v$ is a diffeo. \textbf{Oh shit, he said something in here is a Lie set, or something.}
+
+comments: 
+\begin{itemize}
+    \item For $T_{\phi(P)}V \cong T_{\phi(P) \mathbb{R}^n}$ we can take $\{ \frac{\partial}{\partial x^1} , \dots, \frac{\partial}{\partial x^n}$ as a basis for $T_{\phi(P)}V$. Since $\phi$ is an isomorphism, then $\{ d\phi^{-1}_{\phi(P)}(\frac{\partial}{\partial x^i}\}^n_{i=1}$ would be a basis for $T_P U \cong T_P M$.
+    \item Treating the coord. map $\phi$ as the identification $\phi(P) = (X^1(P), X^2(P), \dots, X^n(P))$ makes sense to write $d\phi ^{-1}_{\phi (P)} (\frac{\partial}{\partial x^i} = \frac{\partial }{\partial x^i}|_P$ since for $f \in C^{\infty}(U)$ we have $\frac{\partial}{\partial x^i}|_P f = \frac{\partial}{\partial x^i}(f \circ \phi^{-1}) = \frac{\partial}{\partial x^i} f(\phi^{-1}f ( \phi^{-1}(x))|_{x=\phi(P)}$
+\end{itemize}
+
+More comments: Essentially, the difference between Euclidean and non-Euclidean is the BAR.
+\begin{itemize}
+    \item If any tangent vector $V \in T_P M$ we can express it as $V = V^i \frac{\partial}{\partial x^i}|_P$. 
+    \item $\{\frac{\partial}{\partial x^i}|_P \}^n_{i=1}$ is called the coordinate basis of $T_PM$
+    \item $\{ V^1, \dots , v^n\}$ are the components of V w.r.t coord. basis. 
+    \item If V is given, then $v^i$ can be computed as:
+    \begin{equation}
+        v(x^i) = (v^j \frac{\partial}{\partial x^j}|_P ) x^i\\
+        = v^j \underbrace{\frac{\partial x^i}{\partial x^j}}_{\partial^i_j}(P) = v^i
+    \end{equation}
+\end{itemize}
+
+Differential of smooth maps in coordinate basis. In the picture, $\hat{F} = \psi \circ F \circ^{-1}$ or $\psi^{-1} \circ \hat{F} = F \circ \phi ^{-1}$. If we say $\hat{p} = (x^1(p), \dots , x^n(p)) =  (y^1(F(P)), \dots, y^m(F(P)))$. 
+
+See figure from class for relation of equations to the drawings. 
+
+Claim: $dF_P (\frac{\partial}{\partial x^i}|_P) = \frac{\partial y^j}{\partial x^i}|_{\hat{P}} \frac{\partial }{\partial y^j}|_{F(P)}$
+ 
+\end{document}
