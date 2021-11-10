@@ -1,0 +1,95 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{21}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review: Level Sets}
+
+For any map $F: M \rightarrow N$ and $q \in N$, the preimage $F^{-1}(q)$ is a level set s.t. $F^{-1}(q) = \{ p \in M | F(p) = q\}$. The choice of $q$ determines the level set. So, we'll distinguish 2 types of $ q \in N$.
+
+\textbf{Defn.:} Suppose $F: M \rightarrow N$ is a smooth mpa between smooth mfds. 
+\begin{itemize}
+    \item A point $q \in N$ is called a regular value of $F$ if $F$ is a submersion at each $p \in F^{-1}(q)$.
+    \item A point $q \in N$ is called a critical value of $F$ if $q$ is not a regular value of $F$. 
+\end{itemize}
+
+\textbf{Defn.:} We will call a pt. $p \in M$ a \textit{regular point} of $F$ if $dF_P$ is surjective and $p \in M$ is a \textit{critical point} of $F$ if it is not a regular pt. 
+
+\textbf{Remarks.} 
+\begin{itemize}
+    \item Regular pt. if rank $dF_P = \dim N$, otherwise, it's a critical point. e.g. think of function $f: M \rightarrow \mathbb{R}$, then its critical points, if surjective, using  $df_P: T_P M \rightarrow T_P \mathbb{R}$ of $p \in M$ is where $df_p = 0$, i.e.
+    \item If $\dim M < \dim N$ (not surjective), then every pt. of $M$ is a critical pt. (by definition)
+    \item By definition, any $q \in N$ s.t. $q \notin F(M)$, then look at preimage, is a preimage.
+    \item $q \in N$ is a regular value if every pt. of the level set $F^{-1}(q)$ is a regular pt., otherwise, it's a critical value (point). 
+    \item Image of the set of critical pts. $=$ set of critical values.
+    \item Moreover, Image of the set of regular pts. $\supset$ set of regular value in the image of $F$. E.g. If $\exists p_1, p_2$ s.t. $p_1$ is a regular pt. and $p_2$ is a critical pt. and $F(p_1) = F(p_2) = q$, then $q$ is a critical value. 
+\end{itemize}
+
+\textbf{Important property of Regular Values}
+
+\textit{Therm.:} If $q$ is a regular value of a smooth map, $F: M \rightarrow N$, then the level set $S = F^{-1}(q)$ is an embedded submfd. of $M$ of dimension $= \dim M - \dim N$. Moreover, $\forall p \in S$, the $T_p S = $ kernel of the map $dF_P: T_P M \rightarrow T_q N$. 
+
+\textbf{Remark.} Thrm. gives a powerful tool to construct embedded submfds. 
+
+Example. The sphere $S^, F: \mathbb{R}^{n+1} \rightarrow \mathbb{R}$ and where $x=(x_1, \dots, x_{n+1}) \mapsto F(x) = x_1^2 + \dots + x_{n+1}^2$. Taking jacobian $dF = (2x_1, \dots, 2x_{n+1}) \neq 0 \forall x \in S^n$. This implies $S^n$ is an n-dmensional embedded submfd. of $\mathbb{R}^{n+1}$. To check the tangent space, $\forall \boldsymbol{a}=(a_1, \dots, a_{n+1}) \in S^n \subset \mathbb{R}^{n+1}$. So, $T_a S^n = \{ \boldsymbol{v} \in \mathbb{R}^{n+1} | \boldsymbol{v} \dot \boldsymbol{a} = 0 \}$. For circle, $dF_a = 2 \boldsymbol{a}^t$, and $dF_a\boldsymbol{v} = 2 \boldsymbol{a}^t \boldsymbol{v} = 0$.
+
+\textbf{Proof of Thrm.} Let $p \in S = F^{-1}(q)$, by the Canonical Submersion Thrm. $\exists$ charts $(\phi_1, U_1, v_1)$ around $p$, and $(\psi_1, x_1, Y_1)$ around $q$... choose charts s.t. you have a mapping $\pi$ from one chart space to another. So, $F(U_1) \subset X_1$ and $\pi = \psi_1 \circ F \circ \phi_1^{-1}$ and $\pi: (x_1, \dots, x_n, x_{n+1}, \dots, x_m) \rightarrow (x_1, \dots, x_n)$, where $\phi_1$ maps $U_1 \cap F^P{-1}(q)$ onto $V_1 \cap \pi^{-1}(0)$ where $\pi^{-1}$ corresponds to $\{ x \in \mathbb{R}^m | x_1 = \dots = x_n = 0 \}$. So $(\phi_1, U_1, V_1)$ is a slice chart and $F^{-1}(q)$ is an embedded submfd. of $\dim m-n$. Moreover, denote the inclusion $i: S \rightarrow M$. Then, for any $p \in S$, $F \circ i(p) = q$. This indicates that $(F \circ i)$ is a constant map on $S$. Then look at differential, $dF_p \circ di_p = 0$ (since it's a constant map). This implies that $dF_p = 0$ on the image of $di_P: T_P S \rightarrow T_P M$. Know that these are in the kernel of the differential, s.t. $T_P S \subset ker (dF_p)$. By $dF_p$ being surjective and dimension counting, then $T_P S$ coincides with the kernel of $dF_p$. 
+
+Thrm. is a special case of "Constant Rank Level Set Thrm." (Lee Thrm. 5.12). Let $F: M \rightarrow N$ with constant rank=k, then each level set of $F$ is a properly embedded submfd. of codimension $k$ in $M$. 
+
+Our special case is when $k = \dim N$. Implies it's a submersion. 
+
+\section{Moving on to chpt. 6}
+
+Ask the question, given a smooth map, $F: M \rightarrow N$, does $F$ have regular values? Answer: "Almost all pts. in $F(M)$ are regular." - Sard's thrm.
+
+
+\end{document}
