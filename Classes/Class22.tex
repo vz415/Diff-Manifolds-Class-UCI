@@ -1,0 +1,113 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{21}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review: Smooth Maps and regular/critical values}
+For smooth map $F: M \rightarrow N$, 
+\begin{itemize}
+    \item $q \in N$ is called a regular value of $F$ if $F$ is a submersion (differential) $\forall p \in F^{-1}(q)$. 
+    \item $q \in N$ is called a critical value of $F$ if $q$ is not a regular value...
+\end{itemize}
+Note: this is different than critical \textunderscore{points}!
+\begin{itemize}
+    \item $p \in M$ is called a regular point of $F$ if $dF_P$ is surjective.
+    \item $p \in M$ is called a critical point of $F$ if it is not a regular point.
+\end{itemize}
+
+\textbf{Thrm.:} If $q \in N$ is a regular value of $F: M \rightarrow N$, then $S=F^{-1}(q)$ is an embedded submfd. of $M$. 
+
+Question: Given a smooth map $F: M\rightarrow N$, does $F$ have regular values? Answer: By Sard's thrm. (1942), roughly, almost all points in $F(M)$ are regular values. i.e. the size (set) of the critical value is "very small" in $N$. What is "very small"?
+
+Need a kind of "measure" to tell us the size of the set. However, we have yet to develop a way to measure volume on a smooth mfd. qualitatively. We haven't given our manifolds things like iner products... (this is a subject of riemannian geometry). 
+
+On $\mathbb{R}^n$, we have a "measure zero" set. \textbf{Defn.:} Given a set $A \subset \mathbb{R}^n$ is called a "measure zero" if $\forall \epsilon > 0, \exists $ a countable family of open sets $V_j \subset \mathbb{R}^n$ s.t.:
+\begin{enumerate}
+    \item $A \subset \underset{j}{U} V_j$
+    \item $\sum_j Vol(v_j) < \epsilon $ 
+\end{enumerate}
+
+Example of measure zero sets. On $\mathbb{R}^1$, (i) have a finite set of pts. On $\mathbb{Q}$, (iii) \textit{cantor set}, which if you take the closed interval from zero to one, then middle third interval, then repeat, and keep going for a while and then take the intersection. It's an uncountable set and is \textit{nowhere dense}.
+
+On $\mathbb{R}^n$, any k-dim ($k<n$), subspace of $\mathbb{R}^n$ has a measure zero. (i.e. lines have no area, planes have no volume).
+
+\textbf{Two properties of measure zero sets }.
+\begin{enumerate}
+    \item A countable union of measure zero sets is still measure zero.
+    \item (Lee prop. 6.5) If $A \subset \mathbb{R}^n$ is a measure zero set and $F: A \rightarrow \mathbb{R}^n$ is a smooth map, then $F(A)$ has measure zero. 
+\end{enumerate}
+
+We'll extend the notion of "measure zero" to subsets of mfds. Recall: Any mfd. $M$ admits an atlas of countable charts and for each chart we can identify an open set in $M$ with an open set in $\mathbb{R}^n$. 
+
+Now, \textbf{Defn.:} Let $M$ be a smooth mfd. of $\dim m = n$, we say a subset $A \subseteq M$ has measure zero in $M$ if for any smooth chart $(\phi, U, V)$ on $M$, the subset $\phi (U \cap A) \subseteq \mathbb{R}^n$ has a n-dim. measure zero.
+
+Remark: The notion of "measure zero" on mfd. is a diffeomorphism invariant. (see picture)
+
+So, $\phi_{\alpha \beta} = \phi_{\beta} \phi_{\alpha}^{-1}$ is a smooth map. By (2) measure zero on $V_{\alpha}$ is a masure zero on $V_{\beta}$. 
+
+Suppose $F: M\rightarrowN$ is a smooth map where $\dim M = \dim N = n$. If $A \subseteq M$ is a measure zero, then $F(A)$ has measure zero in $N$. 
+
+Proof: Let $\{\phi_i, U_i, V_i\}$ be a countable cover of $N$, we need to show for each $(\phi_j, X_j, Y_j)$ on $N$, the set $\psi_j (F(A) \cap X_j)$ has measure zero in $\mathbb{R}^n$. We can express $\psi_j$ as a countable union of subsets. So, $\psi_j \circ F \circ \phi_i^{-1}(\phi_i (A \cap U_i \cap F^{-1}(X_j))$, each of the charts has measure zero.
+
+\textbf{Thrm: Sard's Thrm.} If $F: M \rightarrow N$ is a smooth map and $C$ is the set of all critical pts. of $F$ in $M$, then $F(C)$ is a measure zero set in $N$. 
+
+Remark: Thrm does not claim the set of critical pts. is measure zero... Ex. A constant map where $F(p) = q_0 \in N \forall p \in M$, so all $p \in M$ are critical points. 
+
+However, $F(M)$ still has measure zero. 
+
+\textbf{Corollary to Sard's Thrm.} If $F: M \rightarrow N$ is smooth and $\dim M < \dim N$, then $F(M)$ has measure zero in $N$. \textbf{Proof}: 
+\begin{enumerate}
+    \item Show any $p \in M$ is a critical pt. Proof: by contradiction, suppose $\exists p \in M$ a regular pt., then $dF_p$ is surjective (impossible since linear map!). Not possible since $\dim M < \dim N$. 
+    \item Sard's thrm. says $F(C) = F(M)$ is a measure zero set. 
+\end{enumerate}
+Proof of Sard's Thrm in Lee Thrm. 6.10. It's a proof by induction that, let $m = \dim M$ and $n = \dim N$, then (1) $m=0$ for $n=0$, $F$ has no critical pts. If $n>0$ image of $F$ has measure zero. (2) For $m>1$ suppose hodors for domain of $\dim < m$, then show holds for domain of $\dim m =m$.
+
+\end{document}
