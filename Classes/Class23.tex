@@ -1,0 +1,104 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{23}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Whitney Embedding Theorem}
+
+\textbf{Question:} Can \textit{any} compact smooth mfd. of $\dim = n$ be smoothly embedded as a smooth submfd. of $\mathbb{R}^N$ for some $N$? 
+
+Example. $S^2 \subseteq \mathbb{R}^3_{x_1,x_2,x_3}$ where $x_1^2+x_2^2+x_3^2$ and $S^n \subseteq \mathbb{R}^{n+1}$. Can we embed any mfd. in $\mathbb{R}^n$?
+
+\textbf{Theorem:} Whitney Embedding Thrm. (weakest version). Any compact mfd. $M$ can be embedded into $\mathbb{R}^N$ for sufficiently large $N$. We want to know how to give a bound for a $N$. 
+
+\textbf{Proof:} constructive proof (by giving construction of the embedding) We give an explicit embedding using local charts of $M$. 
+
+Let $\{ \phi_i, U_i, V_i \}_{i=1, \dots, k}$ a finite set of coord. charts on $M$ s.t. $U = \{U_i | 1 \leq i \leq k \}$ is an open cover of $M$. Also introduct the partition of unity. Let $\{ \rho_i \}_{i = 1, \dots, k}$ be a partiiton of unity subordinate to $U_i$ (means that it's a "line" on a bigger manifold/"plane"). Let $\hat{\phi_i}(p) = \rho_i(p) \phi_i(p)$ defined on $M$ extending by zero outside of $U_i$. Maps from $U_i$ onto $\mathbb{R}^N$.  Define $\Phi: M \rightarrow \mathbb{R}^{k(n+1)}$ and $p \mapsto (\hat{\phi}_i, \dots, \hat{\phi}_k(p), \rho_1 (p), \dots, \rho_k(p))$ where each $\hat{\phi}_i$ is a vector of $n$ components.
+
+Use proposition of smooth embedding. 
+\begin{itemize}
+    \item Claim 1: $\Phi$ is an injective map. 
+    \item Claim 2: $\Phi$ is an immersion.
+\end{itemize}
+From Prop. An injective immersion of a compact mfd. is a smooth embedding. 
+
+Proof of Claim 1: $\Phi$ is injective (1-1), so let's assume that we have two points that map into the same point. Check 1-1. Suppose, $\Phi(p_1) = \Phi(p_2) \implies \rho_i(p_1) = \rho_i(p_2) \neq 0$ for some $i$. So, $p_q, p_2 \in supp(p_i) \subset U_i$. Can look at other coords., such as $\phi_i(p_1) = \phi_i(p_2)$ and if this is true, ipmlies $p_1 = p_2$ since $\phi_i$ is bijective. 
+
+Proof of Claim 2: $\Phi$ is an immersion (differential of map is injective along each point). Considering for differential along a tangent space: $ \forall x_p \in T_P M$, $[d\Phi_p](X_p)$. Can think of $X_p = X^i \frac{\partial }{\partial x^1}|_P$.
+\begin{align*}
+    d\Phi_P (X_P) &= \\
+    &= (X_P(\rho_1)\phi_1(p) + \rho_1(p) d\phi_1(X_p) \dots, X_P(\rho_k) \phi_k(p) + \rho_k(p) d\phi_k(X_p), x_P(\rho_1), \dots, X_P(\rho_k))
+\end{align*}
+Check $ker(d\Phi_P)$ is trivial, if $d\Phi_P(X_P) = 0 \implies X_p(\rho_i)=0 \forall i-1,\dots, k$ and $\rho_i(p) d\phi_i (X_P) = 0 \forall i= 1, \dots, k$. 
+
+Note: $\exists j$ s.t. $\rho_j(p) \neq 0 \implies d\phi_j(X_P) = 0 \implies X_P =0 $ since $\phi_j$ is diffeo, which $\implies d \Phi_p$ is injective.
+
+Since $M$ is compact, $\Phi$ is a smooth embedding. 
+
+\textbf{Remarks.} Key idea is to get a family of functions to make sure family is large enough to separate pts. on the mfd. $M$. How do we choose $k$? From differential topology (no proof but helpful) we know that $k$ can be taken to be $\dim M +1 = n+1$, so $N \sim k(n+1) = (n+1)^2$. Need to ask if this is the best, smallest, dimension to embed this into?
+
+\textbf{Thrm.} Whtiney Embedding Thrm. (Strongest version). Any smooth mfd. of $\dim n$ can be embedded into $\mathbb{R}^{2n}$ and immmersed into $\mathbb{R}^{2n-1}$. 
+
+In general, $N=2n$ is the smallest number for embedding of any mfd. But for some special mfds., $\exists$ smaller $N$. e.g. $S^2$ can be embedded in $\mathbb{R}^3$. $S^n$ embedded into $\mathbb{R}^{n+1}$. 
+
+\textbf{Other embedding thrms.} 
+\begin{itemize}
+    \item Given a Riemannian mfd. $(M,g)$ i.e. a smooth mfd. with a way to measure length. Some sense, provides an inner product on each tangent space $T_P M$ s.t. it varies smoothly. 
+    \item By Whitney Embedding Thrm., $M$ can be embedded as a smooth submfd. of $\mathbb{R}^n$. $F: M \dhookrightarrow \mathbb{R^N}$. So on $\mathbb{R}^N$ we have a "metric" $g_{\mathbb{R}^N}$ and this induces a metric $F^*g_{\mathbb{R}^N}$ on $M$, where $g_{\mathbb{R}^N} \dhookrightarrow F^*g_{\mathbb{R}^N}$. We have 2 ways to measure lengths of curves on $M:g$ vs $F^*g_{\mathbb{R}^N}$. Can we find an embedding s.t. $F^*g_{\mathbb{R}^N} =g$? This is called an "isometric embedding". 
+    \item Now, \mathbb{Thrm.} (Nash Embedding). Let $\M,g)$ be a compact Riemannian mfd. Then $\exists$ an isometric embedding $F: M \rightarrow \mathbb{R}^N$ for some $N \geq \frac{n(n+1)}{2}$ vs. $2n$. 
+    \item Complex version of an embedding. Special condition on complex mfd: \textit{Kodaira Embedding}. Roughly, any compact Kahler mfd. (with some special conditions) can be embedded into $\mathbb{C}\mathbb{P}^N$ for some $N$ large.  
+\end{itemize}
+
+\end{document}
