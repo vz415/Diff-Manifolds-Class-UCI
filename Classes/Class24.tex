@@ -1,0 +1,109 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{24}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review: Whitney Embedding Thrm.}
+
+Talked about smooth embedding of $M \rightarrow \mathbb{R}^N$ for some $N$. The (weakest version) of the Whitney Embedding Thrm.: Any compact mfd. $M$ can be smoothly embedded into $\mathbb{R}^N$ for $N$ sufficiently large. The proof was constructive in that we explicitly used a constructive map with an open cover and partition of unity subordinate to the open cover, $\Phi: M \rightarrow \mathbb{R}^N$ is defined by an open cover $U$ of $M$ and a partition of unity submordinate to $U$. 
+
+Found that $N \sim (n+1)^2$, where $n = \dim M$. Want to do better, so Question to ask: Can we do the embedding for a smaller $N$? Essentially asking: what is the smallest $N$ that can guarantee a smooth embedding for any compact mfd.?
+
+\textbf{Thrm.: Whitney Embedding Thrm. (weak - not weakest - version)}
+
+Any compact mfd. of $\dim = n$ can be smoothly embedded into $\mathbb{R}^{2n+1}$ and immersed into $\mathbb{R}^{2n}$. We're going to prove this today. 
+
+\section{Proof}
+Start with a smooth embedding $\Phi: M \dhookrightarrow{} \mathbb{R}^N$ for some $N > 2n + 1$. Show: We can produce a smooth embedding of $M \rightarrow \mathbb{R}^{n-1}$ and continue repeating until $N > 2n + 1$ is no longer satisfied.  We're going to cut dimension-by-dimension.
+
+For $\forall $ elements $[v] \in \mathbb{R}\mathbb{P}^{N-1}$. These are like lines through pseudo-origin. So let's look at orthogonal complement by letting $P_{[v]} = \{ u \in \mathbb{R}^N | u - v = 0\}$. Looking at all orthogonal vectors to the line made by $[v]$. So $P_{[v]}$ is the orthogonal complement of $[v]$ in $\mathbb{R}^n$. Now, let $\Psi_{[v]}: \mathbb{R}^N \rightarrow P_{[v]}$ be the orthogonal projection onto $P_[v]$. Therefore, $M \xrightarrow{\Phi} \mathbb{R}^N \xrightarrow{\Psi_{[v]}} P_{[v]} \sim \mathbb{R}^{N-1}$. And define $\Phi_{[v]} = \Psi_{[v]} \circ \Phi : M \rightarrow \mathbb{R}^{N-1}$. 
+
+Now show $\exists$ some $[v] \in \mathbb{R}\mathbb{P}^{N-1}$ s.t. $\Phi_{[v]}$ is a smooth embedding. Specifically, \textbf{Claim:} The set of $[v]$'s for which $\Phi_{[v]}$ is not a msooth embedding is of measure zero in $\mathbb{R}\mathbb{P}^{N-1}$.
+
+\textbf{Proof of claim: } Since $M$ is compact, if $\Phi_{[v]}$ is not an embedding then either:
+\begin{enumerate}
+    \item $\Phi_{[v]}$ is not injective, or \
+    \item $\Phi_{[v]}$ is not an immersion.
+\end{enumerate}
+Now let's look at these. The set of $[v]\in \mathbb{R}\mathbb{P}^{N-1}$ is true is measure zero. 
+
+\textbf{(1)} Suppose $[v] \in \mathbb{R}\mathbb{P}^{N-1}$ s.t. $\Phi_{[v]}$ is not injective, i.e. $\exists p_1 \neq p_2$ s.t. and since $\Phi$ is an embedding: $\Psi_{[v]}[\Phi(p_1)] = \Psi_{[v]} [\Phi(p_2)]$ .  And $\Psi_{[v]}$ is an orthgonal projection that implies that $\Psi_{[v]}$ is linear. Now look at the difference: $\Psi_{[v]} [\Phi(p_1) - \Phi(p_2)] = 0$ and this needs to be proportional to $[v]$ since the difference gets "projected out". Soooo $[\Phi(p_1) - \Phi(p_2)] = [v]$, where the equal sign represents the equivalence class, i.e. $[v]$ lives in the  image of $im[\Phi(p_1) - \Phi(p_2)]$ (image of the difference).
+
+More formally, $\alpha: M \times M \backslash \Delta_M \rightarrow \mathbb{R}\mathbb{P}^{N-1}$, $(p_1, p_2) \mapsto [\Phi(p_1) - \Phi(p_2)]$ where $\Delta_m = \{ (p,p) | p \in M \}$ where $(p,p) \in M\times M$. Note! $\dim(M \times M \backslash \Delta_M)=2n$ where we assumed that $N > 2n+1$, whcih means that $2n < N-1$. 
+
+Recall: Corollary to Sard's Thrm. If $F: M \rightarrow N$ is smooth and $\dim M < \dim N$, then $F(M)$ has a measure zero in $N$. This implies $\exists [v] \in \mathbb{R}\mathbb{P}^{N-1}$ s.t. $[v] \notin im[\Phi(p_1) - \Phi(p_2)]$ and choose $[v]$ to ensure $\Phi_{[v]}$ is injective. 
+
+\textbf{(2)} Suppose $[v] \in \mathbb{R}\mathbb{P}^{N-1}$ s.t. $\Psi_{[v]}$ is not an immersion, i.e. $\exists X_p \in T_P M$ s.t. $d\Psi_{[v]})_{\Phi(p)} (d\Phi_p)(X_p) = 0$ (*). 
+
+We know $[d\Phi_P(X_P)] \neq 0$ since $\Phi$ is an immersion. 
+
+$\Psi_{[v]}$ is a linear map ($f(x) = ax$) so $d \Psi_{[v]} = \Psi_{[v]}$. This is abuse of notation since this is acting on tangent spaces and not points! Continueing the abuse...
+
+Consider $d\Phi_P(X_P)] \in \mathbb{R}\mathbb{P}^{N-1}$. This implies that (*) is $[d\Phi_P(X_P)] = [v]$. i.e. $[v]$ lies in the image $d\Phi_P$ map. This is bc from (*) $\Psi_{[v]} = (d\Psi_{[v]})_{\Phi(p)}$.
+
+Now, since $\beta: TM \backslash \{0\} \rightarrow \mathbb{R}\mathbb{P}^{N-1}$ and $(p, X_p \mapsto [d \Phi_p (X_p)]$, where $TM \backslash \{0\} = \{(p, X_P) | \forall p \in M$ and $X_p \neq 0 \in T_P M$ and $\dim (TM \backslash \{0\}) = 2n < N-1$ assuming $N>2n +1$. So the image of $\beta$ has measure zero. This implies $\exists [v] \notin im[d\Phi_P(X_P)]$. 
+
+For both (1) and (2) when they're not injective/submersive, they're measure zero.
+
+Altogether, this $\implies \exists [v]$ s.t. $\Phi_{[v]}$ is a smooth embedding. 
+
+Other part of the theorem for statement about $M$ immersed into $\mathbb{R}^{2n}$. Has to be a smooth submersion but not ...
+
+\begin{enumerate}
+    \item Smoothly embed into $\mathbb{R}^{2n+1}$
+    \item Repeat $\Phi_{[v]}$ map and find a $[v] \in \mathbb{R}\mathbb{P}^{2n}$ that ensures $\Phi_{[v]}$ is immersive (need not be injective). 
+\end{enumerate}
+
+\end{document}
