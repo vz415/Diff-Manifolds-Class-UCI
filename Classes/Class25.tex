@@ -1,0 +1,121 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{25}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+HW4: Due last day of class (12/3). Lee Chapter 6:2,9,10,13(a,b),14
+
+Late HW no later than 12/10.
+
+\section*{Review: Sard's Theorem}
+
+It's the set of critical values is the set of measure zero. We used this to show Whitney's embedding Thrm. Should know that every smooth compact n-mfd. has a smooth embedding into $\mathbb{R}^{2n+1}$  or immersion into $\mathbb{R}^{2n}$. This can be improved (but we didn't prove) that this can be improved to embdding into $\mathbb{R}^{2n}$ (Immersion into $\mathbb{R}^{2n-1}$ and assume $n>1$). In the prrof, we used that when $M$ is compact, embedding map $F$ is (1) injective and (2) immersion. These allow us to conclude that $F$ is an embedding. 
+
+However, when $M$ is not compact, have to add an extra condition and need to show that $F$ is a proper map (case when given any compact set, the preimae of the compact set is also a compact set - see Lee Lemma 6.14). 
+
+\section{Another Application of Sard's Thrm.}
+
+Concerns intersection of two spaces.
+\begin{enumerate}
+    \item Submfd. $S \subseteq M$ and then $S \cap M = S$ is an intersection.
+    \item $s, S' \subseteq M$. We're interested in $S \cap S'$.
+\end{enumerate}
+
+Suppose $F \in Diff(M)$ (diffeomorphism on $M$). If we start with a submfd., can mapy with $S' = F(S)$ then we want to see how similar/different the submfd. is, like $S' \cap S$ and helps categorize $F$. 
+
+Now, suppose $F_t \in Diff(M)$ and $t\in [0,1]$ and $F_{t=0} = Id$. Can keep track of how things move by looking at $S'_t = F_t(s)$ and looking at its intersection $S_t' \cap S$. 
+
+Leads to \textbf{Fixed pt. Theory}, where $F(p)=p$. This theory can be expressed in terms of intersections of submfd. in $M \times M$  ($F: M \rightarrow M$).  Here, we have
+\begin{itemize}
+    \item Diagonal $\Delta = \{ (p,p) \in M\times M | p \in M\}$
+    \item $\Gamma_F = \{ (p, F(p))| p \in M\}$.
+\end{itemize}
+
+Basically, looking for $\Delta \cap \Gamma_F$. Number of fixed points corresponds to diagonal between.
+
+\textbf{Question:} Suppose we have two embedded submfds $S, S' \subseteq M$, what can we say about theiri intersection $S\cap S'$? 
+
+Ex. Living in $M= \mathbb{R}^2$. If $S$ is a sine wave adn $S'$ is cosine, then intersections happen to be points. 
+
+If one curve is on the axis and another touches, lingers, and leaves, then intersection will be points and an interval. $S \cap S' = \{$ pts. and intervals$\}$. This is not a mfd. since the intersection space is not a single dimension!
+
+Can ask question: Is there a condition that can guarantee that the intersection is also a submfd.? 
+
+Answer: yes, by the transversal intersection. 
+
+\textbf{Defn:} Let $M$ be a smooth mfd. We say two embedded submfds, $S, S' \subseteq M$ intersect transverseally if for each $p \in S \cap S'$, the two tangent spaces $T_P M \subseteq T_P M$ and $T_P S' \subseteq T_P M$ together span $T_P M$. 
+
+Often it is useful to consider one of the embedded mfd. as a smooth embedding. \textbf{Defn.:} Lett $F: N \rightarrow M$ be a smooth map and $S \subseteq M$ be an embedded submfd. Then, we say $F$ is transverse to $S$ if for every $p \in F^{-1}(S)$, the tangent spaces $dF_P(T_P N)$ and $T_{F(P)} S$ together span $T_{F(P)} M$. (see image from class).
+
+\textbf{Remarks}
+\begin{itemize}
+    \item Since embedded submfd. $F(N) = S'$ can be considered a smooth embedding by the inclusion map of $i: S' \rightarrow M$ we  have two embedded submfds. intersect transversely. This is equivalent to the inclusion of either submfd. is transverse to the other. 
+    \item If $F$ is a smooth submersion, (i.e. $dF_P(TN)$ spans $T_{F(P)}M$) then $F$ is trivially transverse to every embedded submfd. of $M$. 
+\end{itemize}
+
+\textbf{Thrm.:} Let $N$ and $M$ be smooth mfds. and $S \subseteq M$ is an embedded submfd. 
+\begin{enumerate}
+    \item If $F: N \rightarrow M$ is a smooth amp that is transverse to $S$, then, $F^{-1}(S)$ is an embedded submfd. of $N$ and, moreover, codimension (in $N$), $F^{-1}(S) = codim S$, (In $M$) - this tells the dimensions since, if you know the codimension, you know the dimensionality.
+    \item If $S' \subseteq M$ is an embedded submfd. that intersects $S$ transversely, then $S \cap S'$ is an embedded submfd. of $M$, where codimension of $S \cap S' = codim S + codim S' $.
+\end{enumerate}
+We need to check the dimension. \textbf{Remark:} 
+\begin{itemize}
+    \item Dimension of $S \cap S'$. Let $m = \dim M$ and $n = \dim N$, then $s =\dim S$ and $S' = \dim S'$ and $k = \dim S \cap S'$. 
+    \item Then $codim S \cap S' = codim S+ codim S'$. Thinking of dimensions, this is equivalent to $m -k = (m-s) + (m - S')$, which gives us $S + S' = m+k$. We're in 3D with two planes, $S$ and $S'$, can check if in 3D, by $2 + 2 = 3 + 1$, where $k=1$. 
+\end{itemize}
+
+We'll prove the thrm. next time.
+
+\end{document}
