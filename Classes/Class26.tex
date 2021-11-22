@@ -1,0 +1,100 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{26}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Review: Transverse Intersection of Embedded Submfds}
+
+We introduced $S, S' \subseteq M$ are intersect transversely if $\forall p \in S \cap S'$,  $T_P S$ and $T_P S'$ together span $T_P M$. 
+
+Have \textbf{Transverse Map} w.r.t. an embedded $S \subseteq M$ i.e. $F: N \rightarrow M$ is a smooth map is transverse to $S$. 
+
+If $\forall p \in F^{-1}(s), dF_P (T_P N)$ and $T_{F(P)} S$ together span $T_{F(P)} M$. See picture from class of intersection of two planes in $\mathbb{R}^3$. The intersection itself is a manifold!
+
+\textbf{Thrm.:} 
+\begin{enumerate}
+    \item If $F:  N \rightarrow M$ is transverse to $S$, then $F^{-1}(S)$ is an embedded subfd. of $N$ and $codimF^{-1} = codimS$.
+    \item If $S, S' \subseteq M$ intersects transversely, then $S \cap S'$ is an embedded submfd. and $codim(S\cap S') = codimS + codimS'$. This is equiv. to saying $dim(S \cap S') = dimS + dimS' - dimM$.
+\end{enumerate}
+
+\textbf{Proof (more like a slogan):} When two submfds. intersect transversely, the intersection is also a submfd. Now for the actual \textbf{proof}. When (1) implies (2). Assume (1) take $F = i: S' \mapsto M$ where $S' = N$ and assume it's a smooth embedding. Then, looking at intersection $S \cap S'$, which is $F^{-1}(S)$, by inclusion goes into S then M like so: $S \cap S' \mapsto S' \mapsto M$. This is a composition of two embeddings, which is also an embedding. 
+
+For dimension, let $M= dimM, n=dimN, s=dimS, s'=dimS', k=dim( S \cap S'), codimF^{-1}(S)$, where $F^{-1}(S)$ is in $N=S')$ and  $codimF^{-1}(S) = codimS = m-s \implies k = s + s' - m$.
+
+\textbf{Proof of (1)} Need to use proposition from Leed Prop. 5.16: Embedded submfds is at least locally the level set of a smooth submersion. Time for a picture to understand!
+
+Specifically, given $p \in F^{-1}(S), \exists $ a nbhd. of $U$ of $F(P) \in M$ and a local defining submersion $\Phi: U \rightarrow \mathbb{R}^{m-s}$ s.t. $S \cap U = \Phi^{-1}(0)$. We want to show that $c=0$ is a regular value of the map $\Phi \circ F$, then the level set of $\Phi \circ F$ is an embedded submfd. Resulting from this, the $codimF^{-1}(S) = m - s = codimS$. 
+
+We need to show that $\Phi \circ F$ is a submersion. To do this, consider $\forall Z \in T_{c=0} \mathbb{R}^{m-s} \exists X \in T_P N$, s.t. $Z=d(\Phi \circ F)_P X$. 
+
+Note: $\Phi$ is a submersion. This means $\forall Z \in T_{c=0}\mathbb{R}^{m-s} \exists Y \in T_{F(P)} M$ s.t. $Z = d\Phi_{F(P)}(Y)$. 
+
+Since $F$ is transverse to $S$, can write: $Y = Y_0 + dF_P(X)$ for some $Y_0 \in T_{F(P)} S$.  and  $X \in T_P N$. Can now write any $Y$ as any linear combination of the two. 
+
+Since $\Phi$ is constant on $S \cap U$, $d\Phi_{F(P)} Y_0 = 0$. Now, $d(\Phi \circ F)_P(X) =  d\Phi_{F(P)}[dF_P(X)] = d\Phi_{F(P)}[Y_0 + dF_P(X)]=d\Phi_{F(P)}[Y]=Z$.
+
+Generically, intersection between 2 embedded submfds. is not transverse. If $M = \mathbb{R}^2$, can draw lines $S$ and $S'$ and if we move (deform - locally or globally) one of the mfds $S$ or $S'$ to create a transverse intersection. Can transverse something with non-transverse intersection to transverse by deformations. But, we need to be more precise about what we mean by deforming...
+
+\textbf{Precision of deforming a submfd.:} By homotopy, considering the map $F: N \rightarrow M$, if we allow deformation, we can change the map, $F$, a little. So, allow deformation or movement parameterized by parameter $t$, i.e. a t-dependent map. $F_t: N \rightarrow M$ where $p \mapsto F_t(P)$. Suppose $t$ is a finite parameter, then we can normalize $t \in [0,1]$. 
+
+Given this, we can write a new function $H: N \times I \rightarrow M$, where $(p,t) \mapsto H(p,t) = F_t(P)$. This notion of $H$ is helpful as it leads to the definition...
+
+\textbf{Defn.:} For $N$ and $M$ smooth mfds, we say $H: N \times N \rightarrow M$ is a smooth homotopy if $H$ is also a smooth map. One more definition...
+
+\textbf{Defn.:} Say two maps $F, G: N \rightarrow M$ are smoothly homotomopic if there is a smooth homotopy between them, i.e. $\exists H: N \times I \rightarrow M$. $H(p, t=0) = F(p)$ and $H(p, t=1) = G(p)$.
+
+\textbf{Thrm.:} Transversality Homotopy Thrm. Suppose $N$ and $M$ are smooth mfds. and $X \subseteq M$ is an embedded submfd. Claim: Every smooth map $F: N \rightarrow M$ is homotopic to a smooth map $G:N \rightarrow M$ that is transverse to $X$. (this is different than topology since everything is smooth). 
+
+\end{document}
