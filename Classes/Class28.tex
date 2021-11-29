@@ -1,0 +1,132 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{28}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Lie Groups!}
+
+Smooth mfds. that are also groups! 
+
+\section{Review of Groups}
+A group $(G, \cdot )$ is a set of elements $G$ with an operation $\cdot$ that satisfy:
+
+\begin{enumerate}
+    \item Closure $g \cdot g' \in G$
+    \item Associativity $(g \cdot g')\cdot g'' = g\cdot (g' \cdot g'')$
+    \item Identity $\exists e \in G s.t. e\cdot g = g \cdot e = g$
+    \item Inverse $\exists g^{-1} \in G s.t. g^{-1} \cdot g = g \cdot g^{-1} = e \forall g \in G$
+\end{enumerate}
+
+Question: Can mfds be groups? Need an opeartion $pt \cdot pt = pt$
+
+Ex. $(\mathbb{R}, + )$ or $(\mathbb{R}^n, + )$ is a group under addition.
+
+Ex. $S' = \mathbb{R}/\mathbb{Z}$ where $x \sim x+1)$ and $(S', +)$ so can think of adding angles as a group operation. Can think of the circle as living in a complex plane.
+
+Can generalize to Tauruses as $(T^n, +)$, where $T^n = S' \times \dots \times S'$for $n$ times.
+
+\textbf{Defn.:} A Lie Group is a smooth mfd. denoted by $G$, that is also a group, such that the two group operations 
+\begin{itemize}
+    \item Multiplication $\mu : G \times G \rightarrow G$ and $(g_1, g_2) \mapsto \mu(g_1, g_2) = g_1, g_2$
+    \item Inverse $i: G \rightarrow G$ and $g \mapsto i(g) = g^{-1}$.
+    \item We want both of these to be smooth maps!
+\end{itemize}
+
+\textbf{Defn.:} The dimension of $G$ is its dimension as a mfd. not as a group. 
+
+More examples: 
+\begin{itemize}
+    \item $\mathbb{R}^* = \mathbb{R} \backslash \{0\} $ is $(\mathbb{R}^*, x) $ group under multiplication not including zero.
+    \item An important class of Lie Groups is the \textit{matrix group}. Recalling, a \textbf{General Linear Group} is $GL(n, \mathbb{R}) = \{ A \in Mat(n, \mathbb{R})|\det A \neq 0$ (invertible since determinant isn't zero) which is a matrix on real numbers. This is a set of all $n \times n$ invertible real matrices with matrix multiplication as the group operation and the identity $I_{n /times x}$.
+    
+    Thinking of the simplest case of GLN, $GL(1, \mathbb{R}) = \mathbb{R}^*$. \textbf{Remark}: $GL(n, \mathbb{R})$ is an open subset of the vector space $Mat(n, \mathbb{R})$. 
+    
+    For smooth coords., we can take the standard coord. $x^i_j: GL(n, \mathbb{R})\rightarrow \mathbb{R}^1$ is defined by $x^i_j \begin{pmatrix}
+a_{11} & \dots & a_{1n}\\
+\vdots & \ddots & \vdots \\
+a_{n1} & \dots & a_{nn}
+\end{pmatrix} = a_{ij}$, where $dimGL(n, \mathbb{R} = n^2$. Since $x^i_j (AB) = \sum_{k=1}^n x^i_k (A) x^k_j(B)$ the multiplicatino $\mu: GL(n, \mathbb{R}) \times GL(n, \mathbb{R}) \rightarrow GL(n, \mathbb{R})$ is smooth.
+
+Often, $\mathbb{R}\rightarrow\mathbb{C}$ and study: $GL(n, \mathbb{C}) = \{ A \in Mat(n, \mathbb{C}) | detA \neq 0\}$. 
+
+Most of the important Li groups that arise in geometry are subgroups of $GL(n, \mathbb{R})$ or $GL(n, \mathbb{C})$.
+\end{itemize}
+
+\textbf{Defn.:} A Lie subgorup $H$ of $G$ is a subgroup of $G$ endowed with a topology (need not be the subspace topology!) and smooth structure s.t. $H$ is a Lie Group and an \textit{immersed} submfd. of $G$. Where an immeresed submfd. is an injective immersion. A relaxed definition is Taurus with repeating (not correct terminology) boundaries.
+
+\textbf{(Prop. 7.11 Lee)} Let $G$ be a Lie group and suppose $H \subseteq G$ is a subgroup that is also an embeddd submfd. Then, $H$ is a Lie subgroup. 
+
+\textbf{Common Lie subgroups of $GL(n, \mathbb{F}) $ where $\mathbb{F} = \mathbb{R} || \mathbb{C}$.}
+
+\begin{itemize}
+    \item The special Linear group is special because the determinant is $\pm 1$ and defined as $SL(n, \mathbb{F}) = \{ A \in Mat(n, \mathbb{F}) | det A = 1\}$ and $dim[SL(n, \mathbb{R}) ] = n^2 -1$
+    \item Orthogonal Group (from linear algebra): $O(n) = \{ A \in Mat(n, \mathbb{R})| AA^t =1\}$. This is interesting because $|AA^t| = |1| = 1$ so $|A|^2 = 1 \implies |A| = \pm 1$. Nice thing about discrete numbers is you can't jump from one to another! $O(n)$ has at least 2 components. 
+    \item Special Orthogonal Group $SO(n) = \{ A \in O(n) | det A = 1\}$. The $SO$ group is famous because it's just a rotation group (rotation preserves the dot product!) of $\mathbb{R}^n$. So, $SO(n) = O(n) \cap SL(n, \mathbb{R})$. What is the dimension of the space? $dim SO(n) = dim GL(n, \mathbb{R}) - \frac{n(n+1)}{2} = \frac{n(n-1)}{2}$. Usually, world is invariant under rotation. 
+    \item Complex verisions...
+    \begin{itemize}
+        \item Unitary Group $U(n) = \{ A \in Mat(n, \mathbb{C}) | AA^*=1\}$ where $A^* $ is the conjugate transpose.
+        \item Special unitary group, $SU(n) = \{ A \in U(n)| detA =1\} = U(n) \cap SL(n, \mathbb{C})$.
+    \end{itemize}
+    \item Consider $SU(n)$ vs. $U(n)$. If we have $\det|A|\det|A^*| = 1$ can be written as $e^{i \theta}e^{-i\theta} = 1$ which means that it's sitting on the circle. So you can consider the map $SU(n) \times U(1) \rightarrow U(n)$ and $(A, e^{2\pi i \theta }) \mapsto A e^{2 \pi i \theta}$ (where $U(1)$ is like saying $(z)(\Bar{z}) = |z|^2 = 1$ thus $z = e^{i \theta}$). This is not an isomorphism. So, $(e^{\frac{2 \pi i}{n}} \mathbf{1}_{n \times n}, e^{\frac{-2 \pi i}{n}}) \rightarrow 1.$ For the $n=2(\begin{pmatrix}
+e^{\pi i } & 0\\
+0 & e^{\pi i }
+\end{pmatrix}, e^{-\pi i }) \mapsto \begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$
+\end{itemize}
+ All in all, $\frac{SU(n) \tmes U(1) }{\mathbb{Z}_n} \cong U(n)$ so $U(1) \cong SO(2) = S^1$ and $SU(2) = S^3$
+
+\end{document}
