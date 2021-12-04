@@ -1,0 +1,140 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{29}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Lie Groups: Review}
+
+A Lie Group is a smooth mfd that is also a group s.t. both (a) multiplication and (b) inverse(?) are smooth maps.  The Lie subgroup of $G$ is a subgroupu of $G$ endowed with a topological and smooth structure that makes it into a Lie group and immersed submfd.
+
+Irrational curve on the torus. (A noneuclidean subgroup)
+
+\begin{equation}
+    \gamma: \mathbb{R} \rightarrow T^2 \\
+    t \mapsto (e^{2 \pi_i t}, e^{2 \pi_j \alpha t})
+\end{equation}
+
+where $\alpha$ is critical...
+
+\textbf{L22 20.12 Closed-Subgroup Theorem}
+Suppose $G$ is a Lie group and $H \subseteq G$ is a subgroup that is a closed subset of $G$. Then $H$ is an embedded Lie Subgroup. 
+
+Example: $\mathbb{R}^n T^$, and $GL(n, \mathbb{R})$, $SL(n)$, $U(n)$, etc.
+
+\textbf{Lie Group Homomorphism}: If $G$ and $H$ are Lie groups, a smooth map $F: G \rightarrow H$ is called a Lie group homomorphism if $F$ is also a group homomorphism, i.e. $(G, *)$, $(H, 0)$, $\forall g_1, g_2 \in G$ and $F(g_1 * g_2) = F(g_1)F(g_2)$. 
+
+$F$ is called a Lie group isomorphism if it is also a diffeo. $\implies \exists F^{-1}: H \rightarrow G$ that is also a group homomorphism.
+
+Examples:
+\begin{enumerate}
+    \item $G = S^1 = \{ e^{2\pi i \phi} \subseteq \mathbb{C} | 0 \leq \phi \leq 1 \} $ with group operator $(\phi_1, \phi_2) \mapsto \phi_1 + \phi_2$. And if $H: \mathbb{C}^* = \mathbb{C} \backslash \{0\}$ and $(z, z') \mapsto zz'$. Thus, the inclusion $i: G \rightarrow H$ is a group homomorphism.
+    \item $G = (\mathbb{R}, +)$  where $exp\cdot \mathbb{R} \rightarrow \mathbb{R}^*$ and $H: (\mathbb{R}^*, \cdot) $ where $t \rightarrow e^t$. And the group homomorphism $t + s \mapsto e^{t+s} = e^t \cdot e^s$.
+    \item $G = (\mathbb{R}, +)$ and $H: (S^1, + angles)$ where $\varepsilon: \mathbb{R} \rightarrow S^1$ and $t \rightarrow e^{2 \pi i t}$. 
+    \item $G: GL(n, \mathbb{R})$ and $H = (\mathbb{R}^*, \cdot)$. And define $GL(n, \mathbb{R}) \rightarrow H$, $A \rightarrow |A|$, and $AB \rightarrow |A||B|$.
+\end{enumerate}
+
+\textbf{Theorem:} The result(?) of any Lie group homomorphism is constant, i.e. $\forall g \in G, dF_G$ has the same result.
+
+Let $G$ be a Lie group. For any fixed elements $a,b \in G$, we have two natural maps:
+\begin{itemize}
+    \item Left multiplication (translation): $L_a : G \rightarrow G$, where $g \rightarrow a\cdot g$
+    \item Right multiplication (translation): $R_b: G \rightarrow G$, where $g \rightarrow b\cdot b$
+\end{itemize}
+
+\textbf{Properties}
+\begin{enumerate}
+    \item $(L_a)^{-1} = L_{a^{-1}}$
+    \item $(R_b)^{-1} = R_{b^{-1}}$. 
+    
+    In fact $L_a$ & $R_b$ are both diffeos of $G$: $L_a$ is a bijection, $H: ag_1 = ag_2 \xRightarrow[]{a^{-1}} g_1 = g_2$ onto: $\forall g \in a^{-1} g = g^1 \impliees g = ag^1$. And they're smooth: 
+\begin{align*}
+    G \xrightarrow[]{in} G \times G \xrightarrow[]{m} G \\
+    g \rightarrow (a,g) \rightarrow ag
+\end{align*}
+
+    \item $L_a R_b = R_b L_a$ commute with each other.
+\end{enumerate}
+
+\textbf{Proof of theorem}: Let $F: G \rightarrow H$ be a group homomorphism. Let $e \in G$ and $\Tilde{e} \in H$ be the identity elements.
+
+Let $g_0$ be an arbitrary element of $G$. Show $dF_g$ and $dF_e$ have the same rank.
+
+Since $F$ is a group homomorphism, for any $g \in G$, can have $F(g_0, g) = F(g_0) \cdot F(g)$ and $F(Lg_0 \cdot g) = L_{F(g_0)} \cdot F(g) \implies F \circ L_{g_0} = L_{F(g_0)} \cdot F$. Take differential at $g=0$: $dF_{g_0}|_e = d(L_{F(g_0)})_{\Tilde{e}} dF_e$, where the second term on the LHS and first term on the RHS are diffeos. Thus, $dF_{g_0}$ and $dF_0$ have the same \textit{rank}.
+
+Note: If $F$ is of constant rank and bijective, the it's a diffeo.
+
+\textbf{Corollary:} A Lie group homemorhphism is a Lie group isomorphism. $H$ it's bijective.
+
+Besides $L_a$ and $R_b$, (?) also has the multiplication: $\mu : G\times G \rightarrow G$ and $(a,b) \rightarrow ab$. Their differentials are related: $d_{\mu}: T_{(a,b)} G\times G \rightarrow T_{ab} G$, where $T_{a,b} \sim (x_a, y_b) \in T_a G \times T_b G$, and $d_{\mu(a,b)}(X_a, Y_b)(t)$ for any $f \in C^{\infty}(G) = (X_a, Y_b)(f \circ \mu (a,b))$.
+
+Note: $\mu(a,b) = ab = R_b(a) = L_a(b)$.
+
+So! $X_a (f \circ R_b(a)) + Y_b(f \circ L_a(b)) = (dR_b)_a(x_a) f + (dL_a)_b(Y_b)f$.
+
+Prop: If $ \mu: G \times G \rightarrow G$ is smooth, then $i : G \rightarrow G$ is also smooth.
+
+Proof: $F: G \times G \rightarrow G \times G$, where $(a,b) \mapsto (a, ab)$. Show is bijection and smooth map and F is diffeo. 
+
+$F^{-1}: G \times G \rightarrow G \times G$ and $(a,c) \rightarrow (a, a^{-1}c)$. 
+
+Inverse map as a composition:
+\begin{align*}
+    G \rightarrow G\times G \xrightarrow[]{F^{-1}} G \times G \xrightarrow[]{\pi_e} G \\
+    f \rightarrow (g,e) \mapsto (g, g^{-1}) \mapsto g^{-1}
+\end{align*}
+
+Fin.
+
+\end{document}
