@@ -1,0 +1,99 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{stackengine}
+\newcommand\dhookrightarrow{\mathrel{%
+  \ensurestackMath{\stackanchor[.1ex]{\hookrightarrow}{\hookrightarrow}}
+}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math 218A}
+\newcommand\class{27}                  % <-- homework number
+
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Class \class}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Transversality Homotopy Theorem}
+
+Suppose $M$ and $N$ are smooth mfds. and $X \subseteq M$ is an embedded submfd. Every smooth map $F: N \rightarrow M$ is homotopic to a smooth map that is transverse to X. 
+
+Remarks: Smooth homotopy (image with unit... rectangle mapped by function to appropriate area/volume on manifold, $M$.  Also, there's a function, $F$, that maps according to $F: N \times I \rightarrow M$. (Where I think $N$ is the manifold from a base space).
+
+From the image that you have in your mind, it follows: $\exists H: N \times I \rightarrow M$ smooth s.t. $H(N, t=0) = F(N)$ and $H(N, t=1) = G(N)$. (Me: Ok, so you have two manifolds and want to go from one to the other?)
+
+In topology, "homotopy" requires only that $H$ be a \textit{continuous} map between topological spaces $N$ and $M$. However, if $N$ and $M$ are smooth mfds. and $F$ & $G$ are smooth maps, then by \textit{Whitney Approximation Theorem} (Lee Thrm. 6.26, which says "Any continuous map $F: N \rightarrow M$ between smooth mfds is homotopic to a smooth map) if $F$ and $G$ are homotopic, then they are also smoothly homotopic. 
+
+\begin{itemize}
+    \item Thrm.: If 2 embedded submfds intersect, we can always deform one so that they intersect transversely.
+    \item Local Model of a transverse intersection. Suppose two submfds $S^1$ and $S^2$, with $\dim S^1=S_1$ & $\dim S^2 = S_2$ intersect transversely in $M$ ($\dim M = m$. Then, locally $\exists $ a local chart s.t. the intersection looks like an intersection in $\mathbb{R}^m$ the first $S_1$ coordinates of $\mathbb{R}^m$ with the last $S_2$ coordinates of $\mathbb{R}^m$. 
+\end{itemize}
+
+Transverse intersections have important applications, e.g. "Fixed pt. theory" & "Morse Theory". 
+
+\textbf{Sketch Proof of Thrm. (Lee 6.29)}
+
+Claim: Can construct a smooth map $H: N \times B^k \rightarrow M$ for some $k$, where $B^k$ is a unit ball in $\mathbb{R}^k$, with the properties:
+\begin{itemize}
+    \item $H(N, 0) = F(N)$
+    \item $H$ is a smooth submersion into $M$ and hence transverse to any embedded submfd. $X \subseteq M$. 
+\end{itemize}
+
+(Applying theory) \textbf{Parametric Transverseality Thrm. (Lee 6.35)}: Suppose $N,M,S$ are smooth mfds., $X \subseteq M$ is an embedded submfd. and $\{ \Gamma_S : s \in S \}$ is a smooth family of maps from $N$ to $M$. (i.e. $H: N \times S \rightarrow M$ with $H(N, S) : F_S(N)$ is a smooth map $\forall s$).
+
+If $H: N \times S \rightarrow M$ is transverse to $X$, then for almost every $s \in  S$, the map $F_S : N \rightarrow M$ is transverse to $X$, then for almost every (except for a set of measure zero) $s \in S$, the map $F_S: N \rightarrow M$ is transverse to $X$. 
+
+Choose a point $s^1 \in B^k$, $H(N, s^1)$ is transverse to $X$. Let $G = H(N, s^1)$, then, clearly $G$ is homotopic to $H(N, 0) = F(\infty)$. Show such a $H: N \times S \rightarrow M$ exists!
+
+Using \textit{Whitney's Embedding Thrm. }, we can embed $M \hookrightarrow \mathbb{R}^k$ for some $k$. Every embedded submfd. $M \rightarrow \mathbb{R}^k$ has a nbhd. $U \subseteq \mathbb{R}^k$ called the \textit{tubular neighborhood} of $M$ (Lee Thrm. 6.24). 
+
+(Picture of a tube around $M$ extending out in the normal direction from $M$ in $\mathbb{R}^3$)
+
+For any tubular nbhd $U$ of $M$, $\exists$ a map $r: U \rightarrow M$ that is a smooth submersion and a retraction (i.e. $r|_M = I_d$).
+
+Construct: $N \times B^k \xrightarrow[]{h} U \xrightarrow[]{r} M$. Then, $h(p,s) = F(p) + e(p)s$ defined s.t. $F(p) + e(p) s \in U \forall p \in N$, where $F: N \rightarrow M$ and $e: N \rightarrow \mathbb{R}^k$, and (what I'm calling a boundary condition) $h(p,s=0) = F(p)$. 
+
+Finally, show that such a $H: N \times S \rightarrow M$ exists. Then, $H = r \circ h: N \times B^k \rightarrow M$ is a smooth submersion with $H(N, 0) = F(N)$.
+
+\end{document}
